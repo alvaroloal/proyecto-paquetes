@@ -1,6 +1,6 @@
 package com.salesianostriana.dam.proyectoalvarolorentealman.model;
 
-public enum Transportation {
+public enum TransportationType {
 	STANDARD,EXPRESS,URGENT
 
 }

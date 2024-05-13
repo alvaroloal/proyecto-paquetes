@@ -1,27 +1,801 @@
-<!doctype html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
- 
+<!DOCTYPE html>
+<html html xmlns:th="http://www.thymeleaf.org" lang="es">
 
 <head>
-	    <!-- Required meta tags -->
-	   
-	<meta charset="utf-8">
-	   
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Web Transporte</title>
 
-	   
-	    <title>Hello, world!</title>
-	 
+
+  <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml" />
+
+
+  <link rel="stylesheet" href="../static/css/style.css" />
+  
+  <link rel="stylesheet" href="../static/js/script.js" />
+
+
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Rubik:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
+
 </head>
- 
 
-<body>    
+<body id="top">
 
-			<h1>
-				Hola <span th:text="${nombre}">mundo</span>
-			</h1>
-			
-	 
+
+  <header class="header" data-header>
+    <div class="container">
+      <h1>
+        <a href="#" class="logo">Transportes Lorente</a>
+      </h1>
+
+      <nav class="navbar" data-navbar>
+        <div class="navbar-top">
+          <a href="#" class="logo">Transportes Lorente</a>
+
+          <button class="nav-close-btn" aria-label="Close menu" data-nav-toggler>
+            <ion-icon name="close-outline"></ion-icon>
+          </button>
+        </div>
+
+        <ul class="navbar-list">
+          <li class="navbar-item">
+            <a href="#home" class="navbar-link" data-nav-link>
+              <span>Inicio</span>
+
+              <ion-icon name="chevron-forward"></ion-icon>
+            </a>
+          </li>
+
+          <li class="navbar-item">
+            <a href="#about" class="navbar-link" data-nav-link>
+              <span>Nosotros</span>
+
+              <ion-icon name="chevron-forward"></ion-icon>
+            </a>
+          </li>
+
+          <li class="navbar-item">
+            <a href="#service" class="navbar-link" data-nav-link>
+              <span>Servicios</span>
+
+              <ion-icon name="chevron-forward"></ion-icon>
+            </a>
+          </li>
+
+          <li class="navbar-item">
+            <a href="#blog" class="navbar-link" data-nav-link>
+              <span>Blog</span>
+
+              <ion-icon name="chevron-forward"></ion-icon>
+            </a>
+          </li>
+
+          <li class="navbar-item">
+            <a href="#" class="navbar-link" data-nav-link>
+              <span>Contacto</span>
+
+              <ion-icon name="chevron-forward"></ion-icon>
+            </a>
+          </li>
+
+          <li class="navbar-item">
+            <a href="#" class="navbar-link" data-nav-link>
+              <button class="btn btn-primary btn-primary-outline-success" type="button">
+                Enviar Paquete
+              </button>
+              <ion-icon name="chevron-forward"></ion-icon>
+            </a>
+          </li>
+          <li class="navbar-item">
+            <a href="#" class="navbar-link" data-nav-link>
+              <button class="btn btn-primary btn-primary-outline-success" type="button">
+                Seguir
+              </button>
+              <ion-icon name="chevron-forward"></ion-icon>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="header-contact">
+        <div>
+          <p class="contact-label"></p>
+
+          <a href="tel:12345678910" class="contact-number">+</a>
+        </div>
+
+        <div class="contact-icon">
+          <ion-icon name="call-outline"></ion-icon>
+        </div>
+      </div>
+
+      <button class="nav-open-btn" aria-label="Open menu" data-nav-toggler>
+        <ion-icon name="menu-outline"></ion-icon>
+      </button>
+
+      <div class="overlay" data-nav-toggler data-overlay></div>
+    </div>
+  </header>
+
+  <main>
+    <article>
+
+      <section class="section hero" aria-label="home" id="home" style="background-image: url('../static/img/hero-banner.jpg')">
+        <div class="container">
+          <div class="hero-content">
+            <h2 class="h1 hero-title">
+              <span class="span">Envia tu paquete</span> al lugar que desees
+            </h2>
+
+            <p class="hero-text">
+              Somos una empresa de transporte que nos encargamos del envio de
+              paqueteria.
+            </p>
+
+            <a href="#service" class="btn-outline">Ver servicios</a>
+
+            <img src="../static/img/hero-shape.png" width="116" height="116" loading="lazy" class="hero-shape shape-1" />
+
+            <img src="../static/img/hero-shape.png" width="116" height="116" loading="lazy" class="hero-shape shape-2" />
+          </div>
+        </div>
+      </section>
+
+      <!-- 
+        - #ABOUT
+      -->
+
+      <section class="section about" id="about" aria-label="about">
+        <div class="container">
+          <figure class="about-banner img-holder" style="--width: 400; --height: 720">
+            <img src="../static/img/about-banner.jpg" width="400" height="720" loading="lazy" alt="" class="img-cover" />
+
+            <img src="../static/img/paquetes2.png" width="260" height="170" loading="lazy" alt="" class="abs-img abs-img-1" />
+
+            <img src="../static/img/about-shape-2.png" width="500" height="500" loading="lazy" alt=""
+              class="abs-img abs-img-2" />
+          </figure>
+
+          <div class="about-content">
+            <p class="section-subtitle">Por que elegir nuestros servicios</p>
+
+            <h2 class="h2 section-title">
+              Somos una empresa profesional en la entrega de paquetería
+            </h2>
+
+
+            <ul class="about-list">
+              <li class="about-item">
+                <div class="about-icon">
+                  <ion-icon name="chevron-forward"></ion-icon>
+                </div>
+
+                <p class="about-text">
+                  .
+                </p>
+              </li>
+
+              <li class="about-item">
+                <div class="about-icon">
+                  <ion-icon name="chevron-forward"></ion-icon>
+                </div>
+
+                <p class="about-text">
+
+                </p>
+              </li>
+
+              <li class="about-item">
+                <div class="about-icon">
+                  <ion-icon name="chevron-forward"></ion-icon>
+                </div>
+
+                <p class="about-text">
+
+                </p>
+              </li>
+
+              <li class="about-item">
+                <div class="about-icon">
+                  <ion-icon name="chevron-forward"></ion-icon>
+                </div>
+
+                <p class="about-text">
+
+                </p>
+              </li>
+
+              <li class="about-item">
+                <div class="about-icon">
+                  <ion-icon name="chevron-forward"></ion-icon>
+                </div>
+
+                <p class="about-text">
+
+                </p>
+              </li>
+
+              <li class="about-item">
+                <div class="about-icon">
+                  <ion-icon name="chevron-forward"></ion-icon>
+                </div>
+
+                <p class="about-text">
+
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- 
+        - #SERVICE
+      -->
+
+      <section class="section service" id="service" aria-label="service">
+        <div class="container">
+          <p class="section-subtitle">Nuestros servicios</p>
+
+          <h2 class="h2 section-title">Servicios que ofrecemos</h2>
+
+          <p class="section-text">
+            Para atender tus necesidades ofrecemos estos servicios.
+          </p>
+
+          <ul class="feature-list grid-list">
+            <li>
+              <div class="feature-card">
+                <div class="card-icon">
+                  <img src="../static/img/feature-icon-1.png" width="72" height="91" alt="" />
+                </div>
+
+                <h3 class="h3 card-title">Hacer un envío</h3>
+
+                <p class="card-text">
+                  Envía tu paquete al destino que desees.
+                </p>
+
+                <a href="#" class="card-btn" aria-label="Read more">
+                  <ion-icon name="arrow-forward"></ion-icon>
+                </a>
+              </div>
+            </li>
+
+            <li>
+              <div class="feature-card">
+                <div class="card-icon">
+                  <img src="../static/img/feature-icon-3.png" width="93" height="93" alt="imagen" />
+                </div>
+
+                <h3 class="h3 card-title">Seguimiento</h3>
+
+                <p class="card-text">
+                  Introduce el numero de seguimiento de tu envío para localizarlo
+                </p>
+
+                <a href="#" class="card-btn" aria-label="Read more">
+                  <ion-icon name="arrow-forward"></ion-icon>
+                </a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 
+        - #FEATURE
+      -->
+
+      <section class="section feature" aria-label="feature">
+        <div class="container">
+          <div class="title-wrapper">
+            <div>
+              <p class="section-subtitle">Trasnportes</p>
+
+              <h2 class="h2 section-title">Tipos de trasportes</h2>
+
+              <p class="section-text">
+                Contamos con varios tipos de transporte para hacerte llegar tu paquete.
+              </p>
+            </div>
+          </div>
+          <ul class="service-list grid-list">
+            <li>
+              <div class="service-card">
+                <div class="card-icon">
+                  <img src="../static/img/service-icon-1.png" width="80" height="60" loading="lazy" alt="Truck" />
+                </div>
+
+                <h3 class="h3 card-title">
+                  <span class="span">01</span> Transporte terrestre
+                </h3>
+
+                <p class="card-text">
+                  Transporte por carretera
+                </p>
+
+                <a href="#" class="btn-link">
+                  <ion-icon name="chevron-forward" aria-hidden="true"></ion-icon>
+                </a>
+              </div>
+            </li>
+
+            <li>
+              <div class="service-card">
+                <div class="card-icon">
+                  <img src="../static/img/service-icon-2.png" width="74" height="60" loading="lazy" alt="Ship" />
+                </div>
+
+                <h3 class="h3 card-title">
+                  <span class="span">02</span> Transporte marítimo
+                </h3>
+
+                <p class="card-text">
+                  Trasporte por mar.
+                </p>
+
+                <a href="#" class="btn-link">
+                  <ion-icon name="chevron-forward" aria-hidden="true"></ion-icon>
+
+
+                </a>
+              </div>
+            </li>
+
+            <li>
+              <div class="service-card">
+                <div class="card-icon">
+                  <img src="../static/img/service-icon-3.png" width="60" height="60" loading="lazy" alt="Airplane" />
+                </div>
+
+                <h3 class="h3 card-title">
+                  <span class="span">03</span> Transporte aéreo
+                </h3>
+
+                <p class="card-text">
+                  Trasnporte por aire.
+                </p>
+
+                <a href="#" class="btn-link">
+                  <ion-icon name="chevron-forward" aria-hidden="true"></ion-icon>
+                </a>
+              </div>
+            </li>
+          </ul>
+
+        </div>
+      </section>
+
+      <!-- 
+        - #PROJECT
+      -->
+
+      <section class="section project" aria-label="project">
+        <div class="container">
+          <p class="section-subtitle">Proyectos</p>
+
+          <h2 class="h2 section-title">Proyectos presentados</h2>
+
+          <p class="section-text">
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry the standard dummy text ever since the when an printer
+            took.
+          </p>
+
+          <ul class="project-list">
+            <li class="project-item">
+              <div class="project-card">
+                <figure class="card-banner img-holder" style="--width: 397; --height: 352">
+                  <img src="../static/img/project-1.jpg" width="397" height="352" loading="lazy" alt="Warehouse inventory"
+                    class="img-cover" />
+                </figure>
+
+                <button class="action-btn" aria-label="View image">
+                  <ion-icon name="expand-outline"></ion-icon>
+                </button>
+
+                <div class="card-content">
+                  <p class="card-tag">Warehousing , Distrbution</p>
+
+                  <h3 class="h3">
+                    <a href="#" class="card-title">Warehouse inventory</a>
+                  </h3>
+
+                  <a href="#" class="card-link">Read More</a>
+                </div>
+              </div>
+            </li>
+
+            <li class="project-item">
+              <div class="project-card">
+                <figure class="card-banner img-holder" style="--width: 397; --height: 352">
+                  <img src="../static/img/project-2.jpg" width="397" height="352" loading="lazy" alt="Warehouse inventory"
+                    class="img-cover" />
+                </figure>
+
+                <button class="action-btn" aria-label="View image">
+                  <ion-icon name="expand-outline"></ion-icon>
+                </button>
+
+                <div class="card-content">
+                  <p class="card-tag">Logistics, Analytics</p>
+
+                  <h3 class="h3">
+                    <a href="#" class="card-title">Minimize Manufacturing</a>
+                  </h3>
+
+                  <a href="#" class="card-link">Read More</a>
+                </div>
+              </div>
+            </li>
+
+            <li class="project-item">
+              <div class="project-card">
+                <figure class="card-banner img-holder" style="--width: 397; --height: 352">
+                  <img src="../static/img/project-3.jpg" width="397" height="352" loading="lazy" alt="Warehouse inventory"
+                    class="img-cover" />
+                </figure>
+
+                <button class="action-btn" aria-label="View image">
+                  <ion-icon name="expand-outline"></ion-icon>
+                </button>
+
+                <div class="card-content">
+                  <p class="card-tag">Warehousing , Distrbution</p>
+
+                  <h3 class="h3">
+                    <a href="#" class="card-title">Warehouse inventory</a>
+                  </h3>
+
+                  <a href="#" class="card-link">Read More</a>
+                </div>
+              </div>
+            </li>
+
+            <li class="project-item">
+              <div class="project-card">
+                <figure class="card-banner img-holder" style="--width: 397; --height: 352">
+                  <img src="../static/img/project-4.jpg" width="397" height="352" loading="lazy" alt="Warehouse inventory"
+                    class="img-cover" />
+                </figure>
+
+                <button class="action-btn" aria-label="View image">
+                  <ion-icon name="expand-outline"></ion-icon>
+                </button>
+
+                <div class="card-content">
+                  <p class="card-tag">Logistics, Analytics</p>
+
+                  <h3 class="h3">
+                    <a href="#" class="card-title">Minimize Manufacturing</a>
+                  </h3>
+
+                  <a href="#" class="card-link">Read More</a>
+                </div>
+              </div>
+            </li>
+
+            <li class="project-item">
+              <div class="project-card">
+                <figure class="card-banner img-holder" style="--width: 397; --height: 352">
+                  <img src="../static/img/project-5.jpg" width="397" height="352" loading="lazy" alt="Warehouse inventory"
+                    class="img-cover" />
+                </figure>
+
+                <button class="action-btn" aria-label="View image">
+                  <ion-icon name="expand-outline"></ion-icon>
+                </button>
+
+                <div class="card-content">
+                  <p class="card-tag">Warehousing , Distrbution</p>
+
+                  <h3 class="h3">
+                    <a href="#" class="card-title">Warehouse inventory</a>
+                  </h3>
+
+                  <a href="#" class="card-link">Read More</a>
+                </div>
+              </div>
+            </li>
+
+            <li class="project-item">
+              <div class="project-card">
+                <figure class="card-banner img-holder" style="--width: 397; --height: 352">
+                  <img src="../static/img/project-6.jpg" width="397" height="352" loading="lazy" alt="Warehouse inventory"
+                    class="img-cover" />
+                </figure>
+
+                <button class="action-btn" aria-label="View image">
+                  <ion-icon name="expand-outline"></ion-icon>
+                </button>
+
+                <div class="card-content">
+                  <p class="card-tag">Logistics, Analytics</p>
+
+                  <h3 class="h3">
+                    <a href="#" class="card-title">Minimize Manufacturing</a>
+                  </h3>
+
+                  <a href="#" class="card-link">Leer más</a>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 
+        - #BLOG
+      -->
+
+      <section class="section blog" aria-label="blog" id="blog">
+        <div class="container">
+          <p class="section-subtitle">Blog</p>
+
+          <h2 class="h2 section-title">Noticias y eventos</h2>
+
+          <p class="section-text">
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry the standard dummy text ever since the when an printer
+            took.
+          </p>
+
+          <ul class="blog-list grid-list">
+            <li>
+              <div class="blog-card">
+                <figure class="card-banner img-holder" style="--width: 770; --height: 500">
+                  <img src="../static/img/blog-1.jpg" width="770" height="500" loading="lazy"
+                    alt="At the end of the day, going forward, a new normal that has evolved from. your only logistic partner."
+                    class="img-cover" />
+                </figure>
+
+                <div class="card-content">
+                  <time class="card-meta" datetime="2022-08-02">
+                    <span class="span">02</span> Agosto
+                  </time>
+
+                  <h3 class="h3 card-title">
+                    <a href="#">
+                      At the end of the day, going forward, a new normal that
+                      has evolved from. your only logistic partner.
+                    </a>
+                  </h3>
+
+                  <p class="card-text">
+                    New chip traps clusters of migrating tumor cells
+                    asperiortenetur, blanditiis odit. typesetting industry the
+                    standard dummy text ever since the when an printer.
+                  </p>
+
+                  <a href="#" class="btn-link">
+                    <ion-icon name="chevron-forward" aria-hidden="true"></ion-icon>
+
+                    <span class="span">Leer más</span>
+                  </a>
+                </div>
+              </div>
+            </li>
+
+            <li>
+              <div class="blog-card">
+                <figure class="card-banner img-holder" style="--width: 770; --height: 500">
+                  <img src="../static/img/blog-2.jpg" width="770" height="500" loading="lazy"
+                    alt="Going forward, a new normal that has evolved from generation. moving your products across all borders."
+                    class="img-cover" />
+                </figure>
+
+                <div class="card-content">
+                  <time class="card-meta" datetime="2022-08-21">
+                    <span class="span">21</span> Agosto
+                  </time>
+
+                  <h3 class="h3 card-title">
+                    <a href="#">
+                      Going forward, a new normal that has evolved from
+                      generation. moving your products across all borders.
+                    </a>
+                  </h3>
+
+                  <p class="card-text">
+                    New chip traps clusters of migrating tumor cells
+                    asperiortenetur, blanditiis odit. typesetting industry the
+                    standard dummy text ever since the when an printer.
+                  </p>
+
+                  <a href="#" class="btn-link">
+                    <ion-icon name="chevron-forward" aria-hidden="true"></ion-icon>
+
+                    <span class="span">Leer más</span>
+                  </a>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+
+
+      <!---->
+      <!-- 
+       
+      -->
+
+      <section class="section newsletter" aria-label="newsletter">
+        <div class="container">
+          <figure class="newsletter-banner img-holder">
+            <img src="../static/img/newsletter-banner.png" width="303" height="381" alt="newsletter banner" class="w-100" />
+          </figure>
+
+          <div class="newsletter-content">
+            <h2 class="h2 section-title">
+              Registrate para recibir ofertas y noticias
+            </h2>
+
+            <form action="" class="newsletter-form">
+              <input type="email" name="email_address" placeholder="Introduce tu E-mail" aria-label="email"
+                class="email-field" />
+
+              <button type="submit" class="newsletter-btn">
+                Registrarse ahora
+              </button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </article>
+  </main>
+
+
+
+  <!-- 
+    - #FOOTER
+  -->
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top section">
+        <div class="footer-brand">
+          <a href="#" class="logo">Transportes Lorente</a>
+
+          <p class="footer-text">
+            Empresa lider en el sector de reparto de paquetería.
+          </p>
+
+          <ul class="social-list">
+            <li>
+              <a href="#" class="social-link">
+                <ion-icon name="logo-facebook"></ion-icon>
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="social-link">
+                <ion-icon name="logo-twitter"></ion-icon>
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="social-link">
+                <ion-icon name="logo-instagram"></ion-icon>
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="social-link">
+                <ion-icon name="logo-youtube"></ion-icon>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <ul class="footer-list">
+          <li>
+            <p class="footer-list-title">Links</p>
+          </li>
+
+          <li>
+            <a href="#top" class="footer-link">Inicio</a>
+          </li>
+
+          <li>
+            <a href="#" class="footer-link">Nosotros</a>
+          </li>
+
+          <li>
+            <a href="#service" class="footer-link">Servicios</a>
+          </li>
+
+          <li>
+
+
+            <a href="#blog" class="footer-link">Blog</a>
+          </li>
+
+          <li>
+            <a href="#" class="footer-link">Contacto</a>
+          </li>
+        </ul>
+
+        <ul class="footer-list">
+          <li>
+            <p class="footer-list-title">Servicios</p>
+          </li>
+
+          <li>
+            <a href="#service" class="footer-link">Transporte terrestre</a>
+          </li>
+
+          <li>
+            <a href="#service" class="footer-link">Transporte maritimo</a>
+          </li>
+
+          <li>
+            <a href="#service" class="footer-link">Transporte aéreo</a>
+          </li>
+
+        </ul>
+
+        <ul class="footer-list">
+          <li>
+            <p class="footer-list-title"></p>
+          </li>
+
+          <li>
+            <a href="#" class="footer-link"></a>
+          </li>
+
+          <li>
+            <a href="#" class="footer-link"></a>
+          </li>
+
+          <li>
+            <a href="#" class="footer-link"></a>
+          </li>
+
+          <li>
+            <a href="#" class="footer-link"></a>
+          </li>
+
+          <li>
+            <a href="#" class="footer-link"></a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="copyright">
+          &copy; 2024 Transportes Lorente. Todos los derechos reservados
+          <a href="#" class="copyright-link">Álvaro Lorente Almán</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 
+    - #BACK TO TOP
+  -->
+  <a href="#top" class="back-top-btn" aria-label="Back to top" data-back-top-btn>
+    <ion-icon name="chevron-up"></ion-icon>
+  </a>
+
+  <!-- 
+    - js link
+  -->
+  <script src="./js/script.js" defer></script>
+
+  <!-- 
+    - ionicon link
+  -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
 
 </html>

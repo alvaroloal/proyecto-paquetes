@@ -1,4 +1,6 @@
-package com.salesianostriana.dam.proyectoalvarolorentealman.model;
+package com.salesianostriana.dam.proyectopaqueteriaalvarolorente1.model;
+
+
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,18 +11,20 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
 @Entity
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-public abstract class User {
+public abstract class Usuario {
+
 	@Id
 	@GeneratedValue
-	private Long id;
+	protected Long id;
 	
-	private String userName;
-	private String password;
+	protected String nombreCompleto;
+	protected String nombreUsuario;
+	protected String password;
+	protected String email;
 	
-
 }
