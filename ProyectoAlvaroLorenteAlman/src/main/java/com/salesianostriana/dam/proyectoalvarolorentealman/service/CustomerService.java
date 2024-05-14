@@ -5,10 +5,12 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.stereotype.Service;
+
 import com.salesianostriana.dam.proyectoalvarolorentealman.model.Customer;
 import com.salesianostriana.dam.proyectoalvarolorentealman.service.base.BaseServiceImpl;
 import com.salesianostriana.dam.proyectoalvarolorentealman.repository.CustomerRepository;
-
+@Service
 public class CustomerService extends BaseServiceImpl<Customer, Long, CustomerRepository> {
 
 	private List<Customer> list;
