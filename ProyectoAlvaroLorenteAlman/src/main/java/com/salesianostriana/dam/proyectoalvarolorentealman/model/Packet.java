@@ -29,7 +29,6 @@ public class Packet {
 	private Double width;
 	private Double largo;
 	
-	
 	@ManyToOne
 	private Delivery delivery;
 	

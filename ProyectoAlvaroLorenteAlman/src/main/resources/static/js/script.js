@@ -1,6 +1,6 @@
 'use strict';
 /**
- * navbar toggle
+ * navbar
  */
 
 const navbar = document.querySelector("[data-navbar]");
@@ -24,10 +24,7 @@ for (let i = 0; i < navLinks.length; i++) {
 
 
 
-/**
- * header
- * scroll
- */
+
 const header = document.querySelector("[data-header]");
 const backTopBtn = document.querySelector("[data-back-top-btn]");
 

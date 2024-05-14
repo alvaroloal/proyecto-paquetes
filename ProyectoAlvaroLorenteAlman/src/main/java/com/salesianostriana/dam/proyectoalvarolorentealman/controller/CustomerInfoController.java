@@ -11,57 +11,47 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.salesianostriana.dam.proyectoalvarolorentealman.model.Customer;
-import com.salesianostriana.dam.proyectoalvarolorentealman.service.CustomerService;
+import com.salesianostriana.dam.proyectoalvarolorentealman.model.CustomerInfo;
+import com.salesianostriana.dam.proyectoalvarolorentealman.service.CustomerInfoService;
 
 @Controller
 @RequestMapping
-public class CustomerController {
+public class CustomerInfoController {
 	
 	@Autowired
-	private CustomerService customerService;
-	
-	public CustomerController(CustomerService service) {
-		this.customerService = service;
-	}
+	private CustomerInfoService service;
 	
 	@GetMapping("/listar")
-	public String showAll(Model model) {
-		List<Customer> customers = customerService.listar();
+	public String listar(Model model) {
+		List<CustomerInfo> customers = service.listar();
 		model.addAttribute("customers", customers);
 		return "indexCustomer";
 	}
 	
 	@GetMapping("/nuevo")
-	public String viewForm(Model model) {
-		model.addAttribute("customer", new Customer());
-		return "formulario";
+	public String agregar(Model model) {
+		model.addAttribute("customer", new CustomerInfo());
+		return "form";
 	}
-	
+
 	@PostMapping("/save")
-	public String save(/*@Valid*/ Customer c, Model model) {
-		customerService.save(c);
+	public String save(/*@Valid*/ CustomerInfo c, Model model) {
+		service.save(c);
 		return "redirect:/listar";
 	}
 
 	@GetMapping("/editar/{id}")
-	public String editar(@PathVariable Long id, Model model) {
-		Optional<Customer> customer = customerService.listarId(id);
+	public String editar(@PathVariable int id, Model model) {
+		Optional<CustomerInfo> customer = service.listarId(id);
 		model.addAttribute("customer", customer);
 		return "form";
 	}
 
 	@GetMapping("/eliminar/{id}")
-	public String delete(Model model, @PathVariable Long id) {
-		customerService.delete(id);
+	public String delete(Model model, @PathVariable int id) {
+		service.delete(id);
 		return "redirect:/listar";
 	}
-	
-	
-	
-	
-	
-	
 	
 	
 
