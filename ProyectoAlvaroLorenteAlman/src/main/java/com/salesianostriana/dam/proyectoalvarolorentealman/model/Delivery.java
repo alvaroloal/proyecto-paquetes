@@ -20,11 +20,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 import lombok.ToString;
 @Entity
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "delivery")
 public class Delivery {
@@ -50,8 +48,8 @@ public class Delivery {
 	
 	
 	
-	private CustomerInfo source;
-	private CustomerInfo destination;
+	private Address source;
+	private Address destination;
 	
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private LocalDate departureDate;
@@ -62,6 +60,7 @@ public class Delivery {
 	private Status status;
 	
 	private Double price;
+	
 	
 	private Invoice invoice;
 	

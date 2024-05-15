@@ -4,8 +4,13 @@ package com.salesianostriana.dam.proyectoalvarolorentealman.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.salesianostriana.dam.proyectoalvarolorentealman.model.CustomerInfo;
+import com.salesianostriana.dam.proyectoalvarolorentealman.model.User;
+
+
 @Repository
-public interface CustomerInfoRepository extends JpaRepository<CustomerInfo, Integer>{
-	
+public interface UserRepository extends JpaRepository<User, Long> {
+
+    User findByUsername(String username);
+    
 }
+

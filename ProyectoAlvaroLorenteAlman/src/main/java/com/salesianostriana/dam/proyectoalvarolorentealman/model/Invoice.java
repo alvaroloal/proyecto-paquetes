@@ -14,7 +14,7 @@ public class Invoice {
 	private Double price;
 	private Double tax;
 	private LocalDate issueDate;
-	private CustomerInfo customerInfo;
+	private Address address;
 	private String companyInfo;
 	
 	

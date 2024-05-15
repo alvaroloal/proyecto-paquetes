@@ -1,36 +1,41 @@
 package com.salesianostriana.dam.proyectoalvarolorentealman.model;
 
-import jakarta.persistence.Column;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.InheritanceType;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.SequenceGenerator;
+
 import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 
+@Entity(name = "users")
 @Data
-@Entity
-@NoArgsConstructor
-@AllArgsConstructor
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@Table(name="user")
 public abstract class User {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id")
-	private Long id;
-	
-	
-	@Column(name="userName")
-	private String userName;
-	
-	@Column(name="password")
-	private String password;
-	
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "users_seq")
+    @SequenceGenerator(name="users_seq", sequenceName="users_seq", allocationSize = 1)
+    private Long id;
+    
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id", referencedColumnName = "id")
+    private Address address;
+
+    private String username;
+
+    private String password;
+
+    @Enumerated(EnumType.STRING)
+    private UserRole role;
+
+    public User(String username, String password, Address address) {
+        this.username = username;
+        this.password = password;
+        this.address = address;
+    }    
 }

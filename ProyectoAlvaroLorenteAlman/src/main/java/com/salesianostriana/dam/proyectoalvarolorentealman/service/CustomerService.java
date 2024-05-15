@@ -7,8 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.salesianostriana.dam.proyectoalvarolorentealman.model.Customer;
-import com.salesianostriana.dam.proyectoalvarolorentealman.model.CustomerInfo;
-import com.salesianostriana.dam.proyectoalvarolorentealman.repository.CustomerInfoRepository;
+
 import com.salesianostriana.dam.proyectoalvarolorentealman.repository.CustomerRepository;
 
 import lombok.Data;
@@ -38,7 +37,6 @@ public class CustomerService {
 
 	public void delete(Long id) {
 		data.deleteById(id);
-
 	}
 
 }

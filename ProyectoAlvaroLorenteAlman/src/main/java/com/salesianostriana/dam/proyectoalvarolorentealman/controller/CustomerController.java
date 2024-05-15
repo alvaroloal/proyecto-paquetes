@@ -34,7 +34,7 @@ public class CustomerController {
 	
 	@GetMapping("/nuevo")
 	public String viewForm(Model model) {
-		model.addAttribute("customer", new Customer());
+		model.addAttribute("customer", new Customer(null, null, null));
 		return "formulario";
 	}
 	
@@ -56,13 +56,4 @@ public class CustomerController {
 		customerService.delete(id);
 		return "redirect:/listar";
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-
 }
