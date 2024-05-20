@@ -1,5 +1,6 @@
 package com.salesianostriana.dam.proyectoalvarolorentealman.model;
 
+import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -7,6 +8,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @Entity
 @EqualsAndHashCode(callSuper = true)
+@DiscriminatorValue("ROLE_CUSTOMER")
 public class Customer extends User {
 	
     public Customer() {

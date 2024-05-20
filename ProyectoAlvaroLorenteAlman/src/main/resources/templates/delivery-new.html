@@ -32,9 +32,9 @@
                         <div class="form-group">
                             <label for="packetType"><span>Tipo</span></label>
                             <select id="packetType" th:field="*{packet.packetType}" class="form-control">
-                                <option th:value="ENVELOPE" th:selected="${packet != null and packet.packetType == 'ENVELOPE'}">SOBRE</option>
-                                <option th:value="BOX" th:selected="${packet != null and packet.packetType == 'BOX'}">CAJA</option>
-                                <option th:value="DOCUMENT" th:selected="${packet != null and packet.packetType == 'DOCUMENT'}">DOCUMENTO</option>
+                                <option th:value="SOBRE" th:selected="${packet != null and packet.packetType == 'SOBRE'}">SOBRE</option>
+                                <option th:value="CAJA" th:selected="${packet != null and packet.packetType == 'CAJA'}">CAJA</option>
+                                <option th:value="DOCUMENTO" th:selected="${packet != null and packet.packetType == 'DOCUMENTO'}">DOCUMENTO</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -57,9 +57,9 @@
                         <div class="form-group">
                             <label for="transportation"><span>Transporte</span></label>
                             <select id="transportation" th:field="*{transportation}" class="form-control">
-                                <option th:value="STANDARD" th:selected="${transportation != null and transportation == 'STANDARD'}">ESTÁNDARD (7 días) </option>
-                                <option th:value="EXPRESS" th:selected="${transportation != null and transportation == 'EXPRESS'}">EXPRÉS (3 días)</option>
-                                <option th:value="URGENT" th:selected="${transportation != null and transportation == 'URGENT'}">URGENTE (1 dia)</option>
+                                <option th:value="ESTANDAR" th:selected="${transportation != null and transportation == 'ESTANDAR'}">ESTÁNDARD (7 días) </option>
+                                <option th:value="EXPRES" th:selected="${transportation != null and transportation == 'EXPRES'}">EXPRÉS (3 días)</option>
+                                <option th:value="URGENTE" th:selected="${transportation != null and transportation == 'URGENTE'}">URGENTE (1 dia)</option>
                             </select>
                         </div>
 
@@ -113,4 +113,3 @@
 </body>
 
 </html>
-s

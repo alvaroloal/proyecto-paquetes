@@ -95,13 +95,13 @@ public class DeliveryService {
     private Double calculatePrice(Packet packet, Double packetVolume) {
         Double price;
         switch (packet.getPacketType()) {
-            case ENVELOPE:
+            case SOBRE:
                 price = 2.0;
                 break;
-            case BOX:
+            case CAJA:
                 price = 5.0 + packetVolume / 1000;
                 break;
-            case DOCUMENT:
+            case DOCUMENTO:
                 price = 1.0;
                 break;
             default:
@@ -118,16 +118,16 @@ public class DeliveryService {
     private Integer calculateDaysAndStatus(Delivery delivery) {
         Integer days;
         switch (delivery.getTransportation()) {
-            case URGENT:
-                delivery.setStatus(PacketStatus.IN_TRANSIT);
+            case URGENTE:
+                delivery.setStatus(PacketStatus.EN_TRANSITO);
                 days = 1;
                 break;
-            case EXPRESS:
-                delivery.setStatus(PacketStatus.PENDING);
+            case EXPRES:
+                delivery.setStatus(PacketStatus.PENDIENTE);
                 days = 3;
                 break;
             default:
-                delivery.setStatus(PacketStatus.PENDING);
+                delivery.setStatus(PacketStatus.PENDIENTE);
                 days = 7;
                 break;
         }
