@@ -1,6 +1,7 @@
 package com.salesianostriana.dam.proyectoalvarolorentealman.model;
 
-public enum Status {
-	ONHOLD,ONTRANSIT,DELIVERED
-
+public enum PacketStatus {
+    PENDING,
+    IN_TRANSIT,
+    DELIVERED
 }

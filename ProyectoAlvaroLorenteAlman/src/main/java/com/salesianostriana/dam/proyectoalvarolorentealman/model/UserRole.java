@@ -1,8 +1,6 @@
 package com.salesianostriana.dam.proyectoalvarolorentealman.model;
 
-
 public enum UserRole {
-    ADMIN,
-    CUSTOMER
+	ROLE_ADMIN,
+	ROLE_CUSTOMER
 }
-

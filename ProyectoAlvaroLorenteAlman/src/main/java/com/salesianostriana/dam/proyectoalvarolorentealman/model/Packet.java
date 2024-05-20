@@ -1,32 +1,28 @@
 package com.salesianostriana.dam.proyectoalvarolorentealman.model;
 
-import jakarta.persistence.Entity;
+import jakarta.persistence.Embeddable;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.SequenceGenerator;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Entity(name = "packet")
+@Embeddable
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Packet {
     
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "packet_seq")
-    @SequenceGenerator(name="packet_seq", sequenceName="packet_seq", allocationSize = 1)
-    private Long id;
-
     @Enumerated(EnumType.STRING)
-    private PacketType type;
+    private PacketType PacketType;
 
-    private Double weight;
+    private Double packetWeight;
 
-    private Double height;
+    private Double packetHeight;
 
-    private Double width;
+    private Double packetWidth;
 
-    private Double length;
+    private Double packetLength;
 
 }
+

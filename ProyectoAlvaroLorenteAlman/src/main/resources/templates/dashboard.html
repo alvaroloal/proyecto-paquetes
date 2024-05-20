@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+</head>
+<body>
+    <h1>Bienvenido, <span th:text="${username}">User</span></h1>
+    
+    <div>
+        <form th:action="@{/deliveries/create}" method="get">
+            <button type="submit">Crear envío</button>
+        </form>
+        <form th:action="@{/comments/create}" method="get">
+            <button type="submit">Rate the Service</button>
+        </form>
+    </div>
+
+    <div th:if="${useradmin}">
+        <form th:action="@{/users/create}" method="get">
+            <button type="submit">Crear nuevo usuario</button>
+        </form>
+        <form th:action="@{/reports/create}" method="get">
+            <button type="submit">Generar reporte</button>
+        </form>
+    </div>
+    
+    <div>
+        <form th:action="@{/deliveries/view}" method="post">
+            <input type="text" name="deliveryId" placeholder="Enter Delivery ID" required>
+            <button type="submit">Ver estado</button>
+        </form>
+        <form th:action="@{'/deliveries/' + ${username} + '/view'}" method="get">
+            <button type="submit">Ver todos mis envíos</button>
+        </form>
+    </div>
+
+    <div th:if="${errorMessage}">
+        <p th:style="'color: red;'" th:text="${errorMessage}"></p>
+    </div>
+    
+    <h2>Users</h2>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Nombre usuario</th>
+            <th>Password</th>
+            <th>Rol</th>
+            <th>Email</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Dirección</th>
+            <th>Acciones</th>
+        </tr>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.id}"></td>
+            <td th:text="${user.username}"></td>
+            <td th:text="${user.password}"></td>
+            <td th:text="${user.role}"></td>
+            <td th:text="${user.address.email}"></td>
+            <td th:text="${user.address.firstName}"></td>
+            <td th:text="${user.address.lastName}"></td>
+            <td th:text="${user.address.street + ', ' + user.address.city + ' ' + user.address.zipCode + ' ' + user.address.country}"></td>
+            <td>
+                <form th:action="@{'/users/' + ${user.username} + '/edit'}" method="get">
+                    <button type="submit">Editar</button>
+                </form>
+                <form th:if="${user.username != username}" th:action="@{'/users/' + ${user.username} + '/delete'}" method="post">
+                    <button type="submit">Borrar</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

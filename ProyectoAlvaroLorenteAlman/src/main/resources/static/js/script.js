@@ -21,10 +21,6 @@ for (let i = 0; i < navLinks.length; i++) {
     overlay.classList.remove("active");
   });
 }
-
-
-
-
 const header = document.querySelector("[data-header]");
 const backTopBtn = document.querySelector("[data-back-top-btn]");
 
