@@ -3,21 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Delivery Status</title>
+    <title>Estado del envío</title>
 </head>
 <body>
-    <h1>Delivery Details</h1>
+    <h1>Detalles</h1>
     
     <div>
-        <h2>Delivery Information</h2>
+        <h2>Información de envíos</h2>
         
         <table>
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Delivery Date</th>
-                    <th>Estimated Arrival Date</th>
-                    <th>Status</th>
+                    <th>Fecha de envío</th>
+                    <th>Fecha estimada de entrega</th>
+                    <th>Estado</th>
                 </tr>
             </thead>
             <tbody>
@@ -30,10 +30,10 @@
                         <td>
                             <form th:action="@{'/deliveries/view/details'}" method="get" style="display:inline">
                                 <input type="hidden" name="deliveryId" th:value="${delivery.id}" />
-                                <button type="submit">Details</button>
+                                <button type="submit">Detalles</button>
                             </form>   
                             <form th:action="@{'/invoices/' + ${delivery.invoice.id} + '/view-pdf'}" method="get" style="display:inline">
-                                <button type="submit">Invoice</button>
+                                <button type="submit">Factura</button>
                             </form>                           
                         </td>
                     </div>  

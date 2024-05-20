@@ -14,66 +14,73 @@ import com.salesianostriana.dam.proyectoalvarolorentealman.repository.UserReposi
 
 import jakarta.transaction.Transactional;
 
+
 @Service
 public class UserService {
 
-	@Autowired
-	private UserRepository userRepository;
+    // Inyecta una instancia de UserRepository para acceder a las operaciones CRUD
+    @Autowired
+    private UserRepository userRepository;
 
-	public List<User> getAllUsers() {
-		return this.userRepository.findAll();
-	}
+    // Obtiene todos los usuarios
+    public List<User> getAllUsers() {
+        return this.userRepository.findAll();
+    }
 
-	public Boolean existsUserByUsername(String username) {
-		return this.userRepository.existsByUsername(username);
-	}
+    // Verifica si un usuario existe por su nombre de usuario
+    public Boolean existsUserByUsername(String username) {
+        return this.userRepository.existsByUsername(username);
+    }
 
-	public User getUserById(Long id) {
-		return this.userRepository.findById(id)
-				.orElseThrow(() -> new ResourceNotFoundException("No se ha encontrado usuario con el id: " + id));
-	}
+    // Obtiene un usuario por su ID
+    public User getUserById(Long id) {
+        return this.userRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + id));
+    }
 
-	public User getUserByUsername(String username) {
-		return this.userRepository.findByUsername(username).orElseThrow(
-				() -> new ResourceNotFoundException("No se ha encontrado usuario con el username: " + username));
-	}
+    // Obtiene un usuario por su nombre de usuario
+    public User getUserByUsername(String username) {
+        return this.userRepository.findByUsername(username)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with username: " + username));
+    }
 
-	@Transactional
-	public User updateUser(User userDetails) {
-		User newUser = this.getUserByUsername(userDetails.getUsername());
+    // Actualiza un usuario existente
+    @Transactional
+    public User updateUser(User userDetails) {
+        User newUser = this.getUserByUsername(userDetails.getUsername());
+        if (userDetails.getPassword() != null) {
+            newUser.setPassword(userDetails.getPassword());
+        }
+        if (userDetails.getRole() != null) {
+            newUser.setRole(userDetails.getRole());
+        }
+        if (userDetails.getAddress() != null) {
+            newUser.setAddress(userDetails.getAddress());
+        }
+        return this.userRepository.save(newUser);
+    }
 
-		if (userDetails.getPassword() != null) {
-			newUser.setPassword(userDetails.getPassword());
-		}
-		if (userDetails.getRole() != null) {
-			newUser.setRole(userDetails.getRole());
-		}
-		if (userDetails.getAddress() != null) {
-			newUser.setAddress(userDetails.getAddress());
-		}
-		return this.userRepository.save(newUser);
-	}
+    // Crea un nuevo usuario
+    @Transactional
+    public User createUser(User user) {
+        if (user.getId() != null && this.userRepository.existsById(user.getId())) {
+            throw new ResourceNotFoundException("User already exists with id: " + user.getId());
+        }
+        if (this.userRepository.existsByUsername(user.getUsername())) {
+            throw new ResourceNotFoundException("User already exists with username: " + user.getUsername());
+        }
+        User newUser;
+        if (user.getRole().equals(UserRole.ROLE_ADMIN)){
+            newUser = new Admin(user.getUsername(), user.getPassword(), user.getAddress());
+        } else {
+            newUser = new Customer(user.getUsername(), user.getPassword(), user.getAddress());
+        }
+        return this.userRepository.save(newUser);
+    }
 
-	@Transactional
-	public User createUser(User user) {
-		if (user.getId() != null && this.userRepository.existsById(user.getId())) {
-			throw new ResourceNotFoundException("Ya existe un usuario con el id: " + user.getId());
-		}
-		if (this.userRepository.existsByUsername(user.getUsername())) {
-			throw new ResourceNotFoundException("Ya existe un usuario con el username: " + user.getUsername());
-		}
-		User newUser;
-		if (user.getRole().equals(UserRole.ROLE_ADMIN)) {
-			newUser = new Admin(user.getUsername(), user.getPassword(), user.getAddress());
-		} else {
-			newUser = new Customer(user.getUsername(), user.getPassword(), user.getAddress());
-		}
-		return this.userRepository.save(newUser);
-	}
-
-	@Transactional
-	public void deleteUser(String username) {
-		this.userRepository.delete(this.getUserByUsername(username));
-	}
-
+    // Elimina un usuario por su nombre de usuario
+    @Transactional
+    public void deleteUser(String username) {
+        this.userRepository.delete(this.getUserByUsername(username));
+    }
 }

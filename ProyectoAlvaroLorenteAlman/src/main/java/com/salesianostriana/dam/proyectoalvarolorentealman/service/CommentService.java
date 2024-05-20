@@ -1,7 +1,7 @@
 package com.salesianostriana.dam.proyectoalvarolorentealman.service;
 
+import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,27 +15,26 @@ import jakarta.transaction.Transactional;
 @Service
 public class CommentService {
 
+    // Inyecta una instancia de CommentRepository para acceder a las operaciones CRUD
     @Autowired
     private CommentRepository commentRepository;
 
+    // Inyecta una instancia de UserService para gestionar usuarios
     @Autowired
     private UserService userService;
 
+    // Constructor para inyectar dependencias
     public CommentService(CommentRepository commentRepository, UserService userService) {
         this.commentRepository = commentRepository;
         this.userService = userService;
     }
 
+    // Obtiene todos los comentarios
     public List<Comment> getAllComments() {
         return this.commentRepository.findAll();
     }
-
-    public Comment getCommentById(Long commentId) {
-        return commentRepository.findById(commentId)
-                .orElseThrow(() -> new RuntimeException("Comment not found with id " + commentId));
-
-    }
     
+    // Crea un nuevo comentario
     @Transactional
     public Comment createComment(Comment comment, String username) {
         User user = this.userService.getUserByUsername(username);
@@ -43,32 +42,7 @@ public class CommentService {
         newComment.setDescription(comment.getDescription());
         newComment.setRating(comment.getRating());
         newComment.setUser(user);
-        return this.commentRepository.save(comment);
+        newComment.setDate(new Date());
+        return this.commentRepository.save(newComment);
     }
-
-    @Transactional
-    public Comment updateComment(Long commentId, Comment comment) {
-        Optional<Comment> existingComment = commentRepository.findById(commentId);
-        if (existingComment.isPresent()) {
-            Comment updatedComment = existingComment.get();
-            updatedComment.setUser(comment.getUser());
-            updatedComment.setRating(comment.getRating());
-            updatedComment.setDescription(comment.getDescription());
-            return this.commentRepository.save(updatedComment);
-        } else {
-            throw new RuntimeException("Comment not found with id " + commentId);
-        }
-    }
-
-    @Transactional
-    public void deleteComment(Long commentId) {
-        this.commentRepository.deleteById(commentId);
-    }
-
-    @Transactional
-    public void deleteAllComments() {
-        this.commentRepository.deleteAll();
-    }
-    
 }
-

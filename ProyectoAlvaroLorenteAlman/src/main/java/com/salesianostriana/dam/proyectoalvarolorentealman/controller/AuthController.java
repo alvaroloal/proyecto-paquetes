@@ -1,10 +1,9 @@
 package com.salesianostriana.dam.proyectoalvarolorentealman.controller;
 
 
+
 import java.security.Principal;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,37 +15,44 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.salesianostriana.dam.proyectoalvarolorentealman.model.Customer;
 import com.salesianostriana.dam.proyectoalvarolorentealman.service.UserService;
 
-
 @Controller
 public class AuthController {
 
-    private final Logger log = LoggerFactory.getLogger(AuthController.class);
-
+    // Inyecta una instancia de UserService para utilizar sus métodos
     @Autowired
     private UserService userService;
 
+    // Muestra el formulario de inicio de sesión
+    // Si hay un error (por ejemplo, nombre de usuario o contraseña incorrectos), añade un mensaje de error al modelo
     @GetMapping("/login")
     public String showLoginForm(@RequestParam(value = "error", required = false) String error, Model model) {
-        log.info("Login page accessed");
         if (error != null) {
-            model.addAttribute("errorMessage", "Invalid username or password");
+            model.addAttribute("errorMessage", "Nombre de usuario o contraseña incorrectos.");
         }
         model.addAttribute("user", new Customer());
         return "login";
     }
-    
+
+    // Gestiona la solicitud de cierre de sesión y redirige al formulario de inicio de sesión
+    @GetMapping("/logout")
+    public String logout() {
+        return "redirect:/login";
+    }
+
+    // Muestra el formulario de registro
+    // Redirige a la página de creación de usuarios
     @GetMapping("/register")
     public String showRegistrationForm(Principal principal, Model model) {
-        log.info("Register page accessed");
         model.addAttribute("user", new Customer());
         return "redirect:/users/create";
     }
 
+    // Gestiona la solicitud de registro de un nuevo usuario
+    // Verifica si el nombre de usuario ya está en uso y, si no, crea un nuevo usuario
     @PostMapping("/register")
     public String registerUser(@ModelAttribute Customer userDetails, Model model) {
-        log.info("Registering user");
         if (this.userService.getUserByUsername(userDetails.getUsername()) != null) {
-            model.addAttribute("errorMessage", "User already exists");
+            model.addAttribute("errorMessage", "El nombre de usuario ya está en uso.");
             return "user-new";
         }
         this.userService.createUser(userDetails);
@@ -54,4 +60,3 @@ public class AuthController {
     }
 
 }
-

@@ -1,7 +1,6 @@
 package com.salesianostriana.dam.proyectoalvarolorentealman.model;
 
 import java.util.Date;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
@@ -23,33 +22,33 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Delivery {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @Embedded
-    private Packet packet;
+	@Embedded
+	private Packet packet;
 
-    @Enumerated(EnumType.STRING)
-    private PacketTransportation transportation;
+	@Enumerated(EnumType.STRING)
+	private PacketTransportation transportation;
 
-    @ManyToOne
-    @JoinColumn(name = "source_id", referencedColumnName = "id")
-    private Address source;
+	@ManyToOne
+	@JoinColumn(name = "source_id", referencedColumnName = "id")
+	private Address source;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "destination_id", referencedColumnName = "id")
-    private Address destination;
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "destination_id", referencedColumnName = "id")
+	private Address destination;
 
-    private Date deliveryDate;
+	private Date deliveryDate;
 
-    private Date estimatedArrivalDate;
+	private Date estimatedArrivalDate;
 
-    @Enumerated(EnumType.STRING)
-    private PacketStatus status;
+	@Enumerated(EnumType.STRING)
+	private PacketStatus status;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "invoice_id", referencedColumnName = "id")
-    private Invoice invoice;
-    
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "invoice_id", referencedColumnName = "id")
+	private Invoice invoice;
+
 }

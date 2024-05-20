@@ -1,11 +1,6 @@
 package com.salesianostriana.dam.proyectoalvarolorentealman.model;
 
-import java.util.List;
-
 import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

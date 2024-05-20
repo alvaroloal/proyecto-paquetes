@@ -1,4 +1,8 @@
-
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 :root {
 
@@ -61,10 +65,68 @@
 
 }
 
+.articles {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  justify-content: center;
+  max-width: 1200px;
+  gap: 1.5rem;
+}
+
+.articles article {
+  max-width: 20rem;
+  width: 100%;
+  cursor: pointer;
+  position: relative;
+  display: block;
+  transition: all 0.4s ease-in-out;
+  overflow: hidden;
+  border-radius: 1rem;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.articles article h2 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.6rem;
+  color: var(--text);
+  transition: color 0.3s ease-out;
+}
 
 
+.articles article img {
+  max-width: 100%;
+  transform-origin: center;
+  transition: transform 0.4s ease-in-out;
+  height: 100%;
+  aspect-ratio: 30 / 9;
+  overflow: hidden;
+  object-fit: cover;
+}
 
+.articles article:hover img {
+  transform: scale(1.5);
+}
 
+.article-preview {
+  padding: 1.5rem;
+  background: white;
+}
+
+.articles figure {
+  width: 100%;
+  height: 14rem;
+  overflow: hidden;
+}
+
+.input-text {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  background-color: white;
+  border-radius: 0.5rem;
+  width: 100%;
+  margin-right: 1rem;
+}
 
 *,
 *::before,
@@ -191,7 +253,7 @@ body {
   font-size: var(--fs-9);
   letter-spacing: 1px;
   padding-block: 10px;
-  padding-inline: 15px 50px;
+  padding-inline: 15px 20px;
 }
 
 .btn::before,
@@ -258,6 +320,7 @@ body {
 
 .header {
   position: fixed;
+  background-color: var(--prussian-blue);
   top: 0;
   left: 0;
   width: 100%;
@@ -366,9 +429,9 @@ body {
 
 .hero {
   position: relative;
-  min-height: 100vh;
+  min-height: 50vh;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size:cover;
   background-position: center;
   display: grid;
   place-content: center;
@@ -397,9 +460,11 @@ body {
   font-size: var(--fs-9);
   font-weight: var(--fw-500);
   text-transform: uppercase;
-  border: 1px solid var(--white);
+  border: 1px solid var(--prussian-blue);
   padding: 8px 20px;
   transition: var(--transition);
+  display: grid;
+  place-content: center;
 }
 
 .btn-outline:is(:hover, :focus) {
@@ -521,7 +586,6 @@ body {
 
 .feature-card {
   position: relative;
-  padding: 30px;
   text-align: center;
   border: 1px solid var(--alice-blue);
   transition: var(--transition);
@@ -550,20 +614,25 @@ body {
   border-radius: 50%;
   margin-inline: auto;
   margin-block-end: 30px;
+  padding: auto;
 }
 
 .feature-card .card-text { margin-block: 20px 40px; }
 
 .feature-card .card-btn {
   color: var(--prussian-blue);
-  font-size: 24px;
+  font-size: 16px;
   border: 2px solid var(--prussian-blue);
   max-width: max-content;
   margin-inline: auto;
-  padding: 10px 18px;
+  padding: 5px 9px;
 }
 
-
+.card-btn:is(:hover, :focus) {
+  background-color: var(--dark-orange);
+  border: 2px solid var(--prussian-blue);
+  color: var(--white);
+}
 
 
 
@@ -1156,9 +1225,11 @@ body {
 
   .feature .section-text { margin-block-end: 0; }
 
-  .feature-list { margin-block-start: 120px; }
+  .feature-list { margin-block-start: 10px; }
 
   .feature-card { padding-block-start: 80px; }
+
+  .feature-card { padding-block-end: 40px; }
 
   .feature-card::before {
     --fs-1: 16rem;
@@ -1284,4 +1355,90 @@ body {
 
   .footer-top { padding-block: 60px; }
 
+}
+
+/**
+  * TABLES
+  */
+
+  .table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 15px;
+}
+
+.table th,
+.table td {
+    padding: 10px;
+    text-align: left;
+}
+
+.table thead th {
+    border-bottom: 2px solid #ddd;
+}
+
+.table tbody tr {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+    background: #fff;
+}
+
+.table tbody tr td {
+    border-bottom: 1px solid #ddd;
+}
+
+.table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.back-top-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    padding: 10px;
+    cursor: pointer;
+    display: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.back-top-btn:hover {
+    background: #0056b3;
+}
+
+.button-container {
+    display: flex;
+    justify-content: left;
+    gap: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.custom-textarea {
+  width: 600px;
+  height: 150px;
+}
+
+.form-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  flex: 1;
+  margin-right: 1rem;
+}
+
+.form-group input {
+  flex: 2;
+}
+
+.form-group span {
+  margin-left: 1rem;
+  white-space: nowrap;
 }

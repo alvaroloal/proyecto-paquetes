@@ -35,6 +35,8 @@ public class SecurityConfiguration {
 	 * 
 	 * damos permiso a los endspoints para que permita todo
 	 * al estar todos en permitAll
+	 * 
+	 * // Configura la cadena de filtros de seguridad
 	 * */
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -63,6 +65,8 @@ public class SecurityConfiguration {
 	 * por lo que hay que tener usuarios creados
 	 * 
 	 * Con springwebSecurity puedo acceder a los usuarios creados
+	 * 
+	 * Configura el servicio de detalles del usuario
 	 */
 	@Bean
 	public UserDetailsService userDetailsService() {
@@ -74,7 +78,8 @@ public class SecurityConfiguration {
 			return builder.build();
 		};
 	}
-
+	
+	// Maneja fallos de autenticación redirigiendo a la página de login con un mensaje de error
 	@Bean
 	public AuthenticationFailureHandler customAuthenticationFailureHandler() {
 		return new SimpleUrlAuthenticationFailureHandler() {

@@ -1,5 +1,6 @@
 package com.salesianostriana.dam.proyectoalvarolorentealman.service;
 
+
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -28,17 +29,21 @@ import java.util.Optional;
 @Service
 public class InvoiceService {
 
+    // Inyecta una instancia de InvoiceRepository para acceder a las operaciones CRUD
     @Autowired
     private InvoiceRepository invoiceRepository;
 
+    // Verifica si una factura existe por su ID
     public Boolean existsById(Long id) {
         return this.invoiceRepository.existsById(id);
     }
 
+    // Obtiene todas las facturas
     public List<Invoice> getAllInvoices() {
         return this.invoiceRepository.findAll();
     }
 
+    // Obtiene una factura por su ID
     public Invoice getInvoiceById(Long id) {
         Optional<Invoice> invoice = this.invoiceRepository.findById(id);
         if (invoice.isPresent()) {
@@ -48,33 +53,13 @@ public class InvoiceService {
         }
     }
 
+    // Crea una nueva factura
     @Transactional
     public Invoice createInvoice(Invoice invoice) {
         return this.invoiceRepository.save(invoice);
     }
-
-    @Transactional
-    public Invoice updateInvoice(Long id, Invoice invoiceDetails) {
-        Optional<Invoice> invoice = this.invoiceRepository.findById(id);
-        if (invoice.isPresent()) {
-            Invoice invoiceToUpdate = invoice.get();
-            if (invoiceDetails.getDate() != null) {
-                invoiceToUpdate.setDate(invoiceDetails.getDate());
-            }
-            if (invoiceDetails.getTotal() != null) {
-                invoiceToUpdate.setTotal(invoiceDetails.getTotal());
-            }
-            return this.invoiceRepository.save(invoiceToUpdate);
-        } else {
-            return null;
-        }
-    }
-
-    @Transactional
-    public void deleteInvoice(Long id) {
-        this.invoiceRepository.deleteById(id);
-    }
-
+    
+    // Genera un PDF de una factura por su ID
     public byte[] getInvoicePdf(Long id) throws IOException, DocumentException {
         Invoice invoice = this.getInvoiceById(id);
 
@@ -86,7 +71,7 @@ public class InvoiceService {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
         Font headerFont = new Font(Font.FontFamily.HELVETICA, 20, Font.BOLD);
-        Paragraph header = new Paragraph("INVOICE", headerFont);
+        Paragraph header = new Paragraph("TRANSPORTES LORENTE - FACTURA", headerFont);
         header.setAlignment(Element.ALIGN_CENTER);
         document.add(header);
 
@@ -99,21 +84,21 @@ public class InvoiceService {
 
         PdfPCell cell;
 
-        cell = new PdfPCell(new Phrase("Invoice ID:"));
+        cell = new PdfPCell(new Phrase("ID de Factura:"));
         cell.setBorder(Rectangle.NO_BORDER);
         detailsTable.addCell(cell);
         cell = new PdfPCell(new Phrase(invoice.getId().toString()));
         cell.setBorder(Rectangle.NO_BORDER);
         detailsTable.addCell(cell);
 
-        cell = new PdfPCell(new Phrase("Date:"));
+        cell = new PdfPCell(new Phrase("Fecha:"));
         cell.setBorder(Rectangle.NO_BORDER);
         detailsTable.addCell(cell);
         cell = new PdfPCell(new Phrase(dateFormat.format(invoice.getDate())));
         cell.setBorder(Rectangle.NO_BORDER);
         detailsTable.addCell(cell);
 
-        cell = new PdfPCell(new Phrase("Due Date:"));
+        cell = new PdfPCell(new Phrase("Fecha de Vencimiento:"));
         cell.setBorder(Rectangle.NO_BORDER);
         detailsTable.addCell(cell);
         cell = new PdfPCell(new Phrase(dateFormat.format(invoice.getDueDate())));
@@ -125,7 +110,7 @@ public class InvoiceService {
         document.add(Chunk.NEWLINE);
 
         Font sectionFont = new Font(Font.FontFamily.HELVETICA, 14, Font.BOLD);
-        Paragraph serviceDetailsHeader = new Paragraph("Service Details", sectionFont);
+        Paragraph serviceDetailsHeader = new Paragraph("Detalles del Servicio", sectionFont);
         serviceDetailsHeader.setSpacingBefore(10f);
         serviceDetailsHeader.setSpacingAfter(10f);
         document.add(serviceDetailsHeader);
@@ -135,11 +120,11 @@ public class InvoiceService {
         serviceTable.setSpacingBefore(10f);
         serviceTable.setSpacingAfter(10f);
 
-        cell = new PdfPCell(new Phrase("Description"));
+        cell = new PdfPCell(new Phrase("Descripción"));
         cell.setHorizontalAlignment(Element.ALIGN_CENTER);
         serviceTable.addCell(cell);
 
-        cell = new PdfPCell(new Phrase("Amount"));
+        cell = new PdfPCell(new Phrase("Precio"));
         cell.setHorizontalAlignment(Element.ALIGN_CENTER);
         serviceTable.addCell(cell);
 
@@ -155,7 +140,7 @@ public class InvoiceService {
         totalTable.setSpacingBefore(10f);
         totalTable.setSpacingAfter(10f);
 
-        cell = new PdfPCell(new Phrase("Tax:"));
+        cell = new PdfPCell(new Phrase("Impuesto:"));
         cell.setBorder(Rectangle.NO_BORDER);
         totalTable.addCell(cell);
         cell = new PdfPCell(new Phrase(invoice.getTax().toString()));
@@ -173,7 +158,7 @@ public class InvoiceService {
 
         document.add(Chunk.NEWLINE);
 
-        Paragraph footer = new Paragraph("Thank you for your business!", new Font(Font.FontFamily.HELVETICA, 12, Font.ITALIC));
+        Paragraph footer = new Paragraph("¡Gracias por su confianza!", new Font(Font.FontFamily.HELVETICA, 12, Font.ITALIC));
         footer.setAlignment(Element.ALIGN_CENTER);
         document.add(footer);
 
@@ -181,6 +166,4 @@ public class InvoiceService {
 
         return byteArrayOutputStream.toByteArray();
     }
-    
 }
-

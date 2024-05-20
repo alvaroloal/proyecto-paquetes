@@ -14,7 +14,8 @@ import java.util.Optional;
 
 @Service
 public class AddressService {
-
+	
+    // Inyecta una instancia de AddressRepository para acceder a las operaciones CRUD
 	@Autowired
 	private AddressRepository addressRepository;
 
@@ -40,6 +41,8 @@ public class AddressService {
         return this.addressRepository.save(address);
     }
 	
+	
+	// Actualiza una dirección existente
 	@Transactional
 	public Address updateAddress(Long id, Address addressDetails) {
 		Address addressUpdated = this.getAddressById(id);
