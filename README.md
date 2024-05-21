@@ -29,8 +29,10 @@ Por último, el administrador desde el panel podrá generar un reporte del estad
 
 ## Arquitectura
 Para implementar la aplicación, se ha decidido dividir las funcionalidades en los siguientes servicios: usuarios, envíos, reportes, comentarios y facturas.
-
+Diagrama diseño
 ![diagrama del proyecto](doc/diagrama-clases.png)
+Diagrama analisis
+![diagrama del proyecto](doc/analisis.png)
 
  **Servicio de gestión de usuario**  
 
