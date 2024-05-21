@@ -54,7 +54,7 @@ public class DeliveryService {
     // Obtiene una entrega por su ID
     public Delivery getDeliveryById(Long id) {
         return this.deliveryRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Delivery not found with id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Envío no encontrado con el id: " + id));
     }
 
     // Obtiene entregas por nombre de usuario

@@ -35,13 +35,13 @@ public class UserService {
     // Obtiene un usuario por su ID
     public User getUserById(Long id) {
         return this.userRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado con id: " + id));
     }
 
     // Obtiene un usuario por su nombre de usuario
     public User getUserByUsername(String username) {
         return this.userRepository.findByUsername(username)
-                .orElseThrow(() -> new ResourceNotFoundException("User not found with username: " + username));
+                .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado con nombre de usuario: " + username));
     }
 
     // Actualiza un usuario existente
