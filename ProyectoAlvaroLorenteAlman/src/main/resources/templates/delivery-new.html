@@ -12,91 +12,163 @@
             <section class="section hero" aria-label="delivery-registration" id="delivery-registration"
                 th:style="'background-image: url(' + @{/img/hero-banner.jpg} + ')'">
                 <div class="container">
-                    <div class="hero-content">
-                        <h2 class="h1 hero-title">
+                    <div class="hero-content"
+                        style="background: rgba(32,56,100,0.10); border-radius: 1.5rem; box-shadow: 0 8px 32px rgba(32,56,100,0.10); padding: 2.5rem 2rem; margin-top: 2rem;">
+                        <h2 class="h1 hero-title" style="text-align:center;">
                             <span class="span">Registro del envío</span>
                         </h2>
                     </div>
                 </div>
             </section>
 
-            <section class="section delivery-registration" id="delivery-registration" aria-label="delivery-registration">
-                <div class="container">
-                    <h2 class="h2 section-title">Detalles del envío </h2>
-                    <form th:action="@{/deliveries/create}" th:object="${delivery}" method="post">
-                        <div th:if="${errorMessage}" class="form-group">
-                            <p th:style="'color: red;'" th:text="${errorMessage}"></p>
-                        </div>
-                        <br>
-                        <h3 class="h3">Información del Paquete</h3>
-                        <div class="form-group">
-                            <label for="packetType"><span>Tipo</span></label>
-                            <select id="packetType" th:field="*{packet.packetType}" class="form-control">
-                                <option th:value="SOBRE" th:selected="${packet != null and packet.packetType == 'SOBRE'}">SOBRE</option>
-                                <option th:value="CAJA" th:selected="${packet != null and packet.packetType == 'CAJA'}">CAJA</option>
-                                <option th:value="DOCUMENTO" th:selected="${packet != null and packet.packetType == 'DOCUMENTO'}">DOCUMENTO</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="packetWeight"><span>Peso (Kg)</span></label>
-                            <input type="number" id="packetWeight" th:field="*{packet.packetWeight}" class="form-control" />
-                        </div>
-                        <div class="form-group">
-                            <label for="packetHeight"><span>Altura (cm)</span></label>
-                            <input type="number" id="packetHeight" th:field="*{packet.packetHeight}" class="form-control" />
-                        </div>
-                        <div class="form-group">
-                            <label for="packetWidth"><span>Ancho (cm)</span></label>
-                            <input type="number" id="packetWidth" th:field="*{packet.packetWidth}" class="form-control" />
-                        </div>
-                        <div class="form-group">
-                            <label for="packetLength"><span>Longitud (cm)</span></label>
-                            <input type="number" id="packetLength" th:field="*{packet.packetLength}" class="form-control" />
-                        </div>
-
-                        <div class="form-group">
-                            <label for="transportation"><span>Transporte</span></label>
-                            <select id="transportation" th:field="*{transportation}" class="form-control">
-                                <option th:value="ESTANDAR" th:selected="${transportation != null and transportation == 'ESTANDAR'}">ESTÁNDARD (7 días) </option>
-                                <option th:value="EXPRES" th:selected="${transportation != null and transportation == 'EXPRES'}">EXPRÉS (3 días)</option>
-                                <option th:value="URGENTE" th:selected="${transportation != null and transportation == 'URGENTE'}">URGENTE (1 dia)</option>
-                            </select>
-                        </div>
-
-                        <h3 class="h3">Dirección de Destino</h3>
-                        <div class="form-group">
-                            <label for="destinationEmail"><span>Correo electrónico</span></label>
-                            <input type="email" id="destinationEmail" th:field="*{destination.email}" class="form-control" />
-                        </div>
-                        <div class="form-group">
-                            <label for="destinationFirstName"><span>Nombre</span></label>
-                            <input type="text" id="destinationFirstName" th:field="*{destination.firstName}" class="form-control" />
-                        </div>
-                        <div class="form-group">
-                            <label for="destinationLastName"><span>Apellido</span></label>
-                            <input type="text" id="destinationLastName" th:field="*{destination.lastName}" class="form-control" />
-                        </div>
-                        <div class="form-group">
-                            <label for="destinationStreet"><span>Calle</span></label>
-                            <input type="text" id="destinationStreet" th:field="*{destination.street}" class="form-control" />
-                        </div>
-                        <div class="form-group">
-                            <label for="destinationCity"><span>Ciudad</span></label>
-                            <input type="text" id="destinationCity" th:field="*{destination.city}" class="form-control" />
-                        </div>
-                        <div class="form-group">
-                            <label for="destinationZipCode"><span>Código Postal</span></label>
-                            <input type="text" id="destinationZipCode" th:field="*{destination.zipCode}" class="form-control" />
-                        </div>
-                        <div class="form-group">
-                            <label for="destinationCountry"><span>País</span></label>
-                            <input type="text" id="destinationCountry" th:field="*{destination.country}" class="form-control" />
-                        </div>
-
-                        <div class="button-container">
-                            <button type="submit" class="btn-outline">Enviar</button>
-                        </div>
-                    </form>
+            <section class="section delivery-registration" id="delivery-registration"
+                aria-label="delivery-registration">
+                <div class="container" style="max-width: 700px; margin: 0 auto;">
+                    <div
+                        style="background: #fff; border-radius: 1.5rem; box-shadow: 0 8px 32px rgba(32,56,100,0.10); padding: 2.5rem 2rem;">
+                        <h2 class="h2 section-title" style="text-align:center; margin-bottom: 2rem;">Detalles del envío
+                        </h2>
+                        <form th:action="@{/deliveries/create}" th:object="${delivery}" method="post">
+                            <div th:if="${errorMessage}" class="form-group" style="margin-bottom: 1.5rem;">
+                                <p style="color: #e74c3c; font-weight: 600; text-align: center; margin: 0;"
+                                    th:text="${errorMessage}"></p>
+                            </div>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem;">
+                                <div>
+                                    <h3 class="h3" style="margin-bottom: 1rem;">Información del Paquete</h3>
+                                    <div class="form-group"
+                                        style="flex-direction: column; align-items: flex-start; margin-bottom: 1rem;">
+                                        <label for="packetType"
+                                            style="font-weight: 600; margin-bottom: 0.5rem;">Tipo</label>
+                                        <select id="packetType" th:field="*{packet.packetType}" class="form-control"
+                                            style="padding: 0.7rem; border-radius: 0.7rem; border: 1px solid #dbeafe; background: #f3f6fa; width: 100%; font-size: 1.2rem;">
+                                            <option th:value="SOBRE"
+                                                th:selected="${packet != null and packet.packetType == 'SOBRE'}">SOBRE
+                                            </option>
+                                            <option th:value="CAJA"
+                                                th:selected="${packet != null and packet.packetType == 'CAJA'}">CAJA
+                                            </option>
+                                            <option th:value="DOCUMENTO"
+                                                th:selected="${packet != null and packet.packetType == 'DOCUMENTO'}">
+                                                DOCUMENTO</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group"
+                                        style="flex-direction: column; align-items: flex-start; margin-bottom: 1rem;">
+                                        <label for="packetWeight" style="font-weight: 600; margin-bottom: 0.5rem;">Peso
+                                            (Kg)</label>
+                                        <input type="number" id="packetWeight" th:field="*{packet.packetWeight}"
+                                            class="form-control"
+                                            style="padding: 0.7rem; border-radius: 0.7rem; border: 1px solid #dbeafe; background: #f3f6fa; width: 100%; font-size: 1.2rem;" />
+                                    </div>
+                                    <div class="form-group"
+                                        style="flex-direction: column; align-items: flex-start; margin-bottom: 1rem;">
+                                        <label for="packetHeight"
+                                            style="font-weight: 600; margin-bottom: 0.5rem;">Altura (cm)</label>
+                                        <input type="number" id="packetHeight" th:field="*{packet.packetHeight}"
+                                            class="form-control"
+                                            style="padding: 0.7rem; border-radius: 0.7rem; border: 1px solid #dbeafe; background: #f3f6fa; width: 100%; font-size: 1.2rem;" />
+                                    </div>
+                                    <div class="form-group"
+                                        style="flex-direction: column; align-items: flex-start; margin-bottom: 1rem;">
+                                        <label for="packetWidth" style="font-weight: 600; margin-bottom: 0.5rem;">Ancho
+                                            (cm)</label>
+                                        <input type="number" id="packetWidth" th:field="*{packet.packetWidth}"
+                                            class="form-control"
+                                            style="padding: 0.7rem; border-radius: 0.7rem; border: 1px solid #dbeafe; background: #f3f6fa; width: 100%; font-size: 1.2rem;" />
+                                    </div>
+                                    <div class="form-group"
+                                        style="flex-direction: column; align-items: flex-start; margin-bottom: 1rem;">
+                                        <label for="packetLength"
+                                            style="font-weight: 600; margin-bottom: 0.5rem;">Longitud (cm)</label>
+                                        <input type="number" id="packetLength" th:field="*{packet.packetLength}"
+                                            class="form-control"
+                                            style="padding: 0.7rem; border-radius: 0.7rem; border: 1px solid #dbeafe; background: #f3f6fa; width: 100%; font-size: 1.2rem;" />
+                                    </div>
+                                    <div class="form-group"
+                                        style="flex-direction: column; align-items: flex-start; margin-bottom: 1rem;">
+                                        <label for="transportation"
+                                            style="font-weight: 600; margin-bottom: 0.5rem;">Transporte</label>
+                                        <select id="transportation" th:field="*{transportation}" class="form-control"
+                                            style="padding: 0.7rem; border-radius: 0.7rem; border: 1px solid #dbeafe; background: #f3f6fa; width: 100%; font-size: 1.2rem;">
+                                            <option th:value="ESTANDAR"
+                                                th:selected="${transportation != null and transportation == 'ESTANDAR'}">
+                                                ESTÁNDARD (7 días) </option>
+                                            <option th:value="EXPRES"
+                                                th:selected="${transportation != null and transportation == 'EXPRES'}">
+                                                EXPRÉS (3 días)</option>
+                                            <option th:value="URGENTE"
+                                                th:selected="${transportation != null and transportation == 'URGENTE'}">
+                                                URGENTE (1 dia)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h3 class="h3" style="margin-bottom: 1rem;">Dirección de Destino</h3>
+                                    <div class="form-group"
+                                        style="flex-direction: column; align-items: flex-start; margin-bottom: 1rem;">
+                                        <label for="destinationEmail"
+                                            style="font-weight: 600; margin-bottom: 0.5rem;">Correo electrónico</label>
+                                        <input type="email" id="destinationEmail" th:field="*{destination.email}"
+                                            class="form-control"
+                                            style="padding: 0.7rem; border-radius: 0.7rem; border: 1px solid #dbeafe; background: #f3f6fa; width: 100%; font-size: 1.2rem;" />
+                                    </div>
+                                    <div class="form-group"
+                                        style="flex-direction: column; align-items: flex-start; margin-bottom: 1rem;">
+                                        <label for="destinationFirstName"
+                                            style="font-weight: 600; margin-bottom: 0.5rem;">Nombre</label>
+                                        <input type="text" id="destinationFirstName" th:field="*{destination.firstName}"
+                                            class="form-control"
+                                            style="padding: 0.7rem; border-radius: 0.7rem; border: 1px solid #dbeafe; background: #f3f6fa; width: 100%; font-size: 1.2rem;" />
+                                    </div>
+                                    <div class="form-group"
+                                        style="flex-direction: column; align-items: flex-start; margin-bottom: 1rem;">
+                                        <label for="destinationLastName"
+                                            style="font-weight: 600; margin-bottom: 0.5rem;">Apellido</label>
+                                        <input type="text" id="destinationLastName" th:field="*{destination.lastName}"
+                                            class="form-control"
+                                            style="padding: 0.7rem; border-radius: 0.7rem; border: 1px solid #dbeafe; background: #f3f6fa; width: 100%; font-size: 1.2rem;" />
+                                    </div>
+                                    <div class="form-group"
+                                        style="flex-direction: column; align-items: flex-start; margin-bottom: 1rem;">
+                                        <label for="destinationStreet"
+                                            style="font-weight: 600; margin-bottom: 0.5rem;">Calle</label>
+                                        <input type="text" id="destinationStreet" th:field="*{destination.street}"
+                                            class="form-control"
+                                            style="padding: 0.7rem; border-radius: 0.7rem; border: 1px solid #dbeafe; background: #f3f6fa; width: 100%; font-size: 1.2rem;" />
+                                    </div>
+                                    <div class="form-group"
+                                        style="flex-direction: column; align-items: flex-start; margin-bottom: 1rem;">
+                                        <label for="destinationCity"
+                                            style="font-weight: 600; margin-bottom: 0.5rem;">Ciudad</label>
+                                        <input type="text" id="destinationCity" th:field="*{destination.city}"
+                                            class="form-control"
+                                            style="padding: 0.7rem; border-radius: 0.7rem; border: 1px solid #dbeafe; background: #f3f6fa; width: 100%; font-size: 1.2rem;" />
+                                    </div>
+                                    <div class="form-group"
+                                        style="flex-direction: column; align-items: flex-start; margin-bottom: 1rem;">
+                                        <label for="destinationZipCode"
+                                            style="font-weight: 600; margin-bottom: 0.5rem;">Código Postal</label>
+                                        <input type="text" id="destinationZipCode" th:field="*{destination.zipCode}"
+                                            class="form-control"
+                                            style="padding: 0.7rem; border-radius: 0.7rem; border: 1px solid #dbeafe; background: #f3f6fa; width: 100%; font-size: 1.2rem;" />
+                                    </div>
+                                    <div class="form-group"
+                                        style="flex-direction: column; align-items: flex-start; margin-bottom: 1rem;">
+                                        <label for="destinationCountry"
+                                            style="font-weight: 600; margin-bottom: 0.5rem;">País</label>
+                                        <input type="text" id="destinationCountry" th:field="*{destination.country}"
+                                            class="form-control"
+                                            style="padding: 0.7rem; border-radius: 0.7rem; border: 1px solid #dbeafe; background: #f3f6fa; width: 100%; font-size: 1.2rem;" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="button-container" style="justify-content: center;">
+                                <button type="submit" class="btn-outline"
+                                    style="width: 100%; padding: 1rem 0; font-size: 1.5rem; border-radius: 0.7rem;">Enviar</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </section>
         </article>

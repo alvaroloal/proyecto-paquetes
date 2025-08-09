@@ -1,43 +1,54 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="es">
-    
+
 <head th:replace="~{header :: title}">
 </head>
+
 <body id="top">
     <th:block th:replace="~{header :: header}"></th:block>
     <main>
-        <article>
-            <section class="section login" aria-label="login">
-                <div class="container">
-                    <h2 class="h2 section-title">Iniciar sesión</h2>
-                    <br>
+        <section class="section login" aria-label="login"
+            style="min-height: 80vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #e3f0ff 0%, #f9f9f9 100%);">
+            <div class="container" style="max-width: 400px; width: 100%;">
+                <div
+                    style="background: #fff; border-radius: 1.5rem; box-shadow: 0 8px 32px rgba(32, 56, 100, 0.15); padding: 2.5rem 2rem;">
+                    <h2 class="h2 section-title" style="text-align:center; margin-bottom: 2rem;">Iniciar sesión</h2>
                     <form th:action="@{/login}" th:object="${user}" method="post" class="login-form">
-                        <div class="form-group">
-                            <label for="username">Nombre de usuario:</label>
-                            <input type="text" id="username" th:field="*{username}" placeholder="Introduce tu nombre de usuario" required>
+                        <div class="form-group"
+                            style="margin-bottom: 1.5rem; flex-direction: column; align-items: flex-start;">
+                            <label for="username" style="font-weight: 600; margin-bottom: 0.5rem;">Nombre de
+                                usuario</label>
+                            <input type="text" id="username" th:field="*{username}"
+                                placeholder="Introduce tu nombre de usuario" required
+                                style="padding: 0.8rem; border-radius: 0.7rem; border: 1px solid #dbeafe; background: #f3f6fa; width: 100%; font-size: 1.4rem;">
                         </div>
-                        <br>
-                        <div class="form-group">
-                            <label for="password">Contraseña:</label>
-                            <input type="password" id="password" th:field="*{password}" placeholder="Introduce tu contraseña" required>
+                        <div class="form-group"
+                            style="margin-bottom: 1.5rem; flex-direction: column; align-items: flex-start;">
+                            <label for="password" style="font-weight: 600; margin-bottom: 0.5rem;">Contraseña</label>
+                            <input type="password" id="password" th:field="*{password}"
+                                placeholder="Introduce tu contraseña" required
+                                style="padding: 0.8rem; border-radius: 0.7rem; border: 1px solid #dbeafe; background: #f3f6fa; width: 100%; font-size: 1.4rem;">
                         </div>
-                        <br>
-                        <div class="form-group">
-                            <button type="submit" class="btn-outline">Iniciar sesión</button>
+                        <div th:if="${errorMessage}" style="margin-bottom: 1.5rem; width: 100%;">
+                            <p style="color: #e74c3c; font-weight: 600; text-align: center; margin: 0;"
+                                th:text="${errorMessage}"></p>
+                        </div>
+                        <div class="form-group" style="justify-content: center;">
+                            <button type="submit" class="btn-outline"
+                                style="width: 100%; padding: 0.9rem 0; font-size: 1.5rem; border-radius: 0.7rem;">Iniciar
+                                sesión</button>
                         </div>
                     </form>
-                    <div th:if="${errorMessage}">
-                        <p th:style="'color: red;'" th:text="${errorMessage}"></p>
-                    </div>
-                    <br>
-                    <div>
-                        <a th:href="@{/register}">¿No tienes una cuenta? Regístrate.</a>
+                    <div style="text-align: center; margin-top: 2rem;">
+                        <a th:href="@{/register}" style="color: var(--green-blue-crayola); font-weight: 600;">¿No tienes
+                            una cuenta? <span style="text-decoration: underline;">Regístrate</span>.</a>
                     </div>
                 </div>
-            </section>
-        </article>
+            </div>
+        </section>
     </main>
 
     <th:block th:replace="~{footer :: footer}"></th:block>
 </body>
+
 </html>

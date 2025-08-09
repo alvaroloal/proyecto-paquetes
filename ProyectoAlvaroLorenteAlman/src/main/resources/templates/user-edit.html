@@ -21,50 +21,96 @@
             </section>
 
             <section class="section user-details" id="user-details" aria-label="user-details">
-                <div class="container">
-                    <h2 class="h2 section-title">Editar usuario</h2>
-                    <br>
-                    <form th:action="@{/users/{username}/edit(username=${user.username})}" th:object="${user}" method="post">
-                        <div class="form-group">
-                            <label for="username"><span>Nombre de usuario</span></label>
-                            <input type="text" id="username" name="username" th:field="*{username}" readonly="readonly" class="form-control"/>
-                        </div>
-                        <div class="form-group">
-                            <label for="password"><span>Contraseña</span></label>
-                            <input type="text" id="password" name="password" th:field="*{password}" class="form-control"/>
-                        </div>
-                        <div class="form-group">
-                            <label for="firstName"><span>Primer apellido</span></label>
-                            <input type="text" id="firstName" name="firstName" th:field="*{address.firstName}" class="form-control"/>
-                        </div>
-                        <div class="form-group">
-                            <label for="lastName"><span>Segundo apellido</span></label>
-                            <input type="text" id="lastName" name="lastName" th:field="*{address.lastName}" class="form-control"/>
-                        </div>
-                        <div class="form-group">
-                            <label for="email"><span>Correo electrónico</span></label>
-                            <input type="email" id="email" name="email" th:field="*{address.email}" class="form-control"/>
-                        </div>
-                        <div class="form-group">
-                            <label for="street"><span>Calle</span></label>
-                            <input type="text" id="street" name="street" th:field="*{address.street}" class="form-control"/>
-                        </div>
-                        <div class="form-group">
-                            <label for="city"><span>Ciudad</span></label>
-                            <input type="text" id="city" name="city" th:field="*{address.city}" class="form-control"/>
-                        </div>
-                        <div class="form-group">
-                            <label for="zipCode"><span>Código postal</span></label>
-                            <input type="text" id="zipCode" name="zipCode" th:field="*{address.zipCode}" class="form-control"/>
-                        </div>
-                        <div class="form-group">
-                            <label for="country"><span>País</span></label>
-                            <input type="text" id="country" name="country" th:field="*{address.country}" class="form-control"/>
-                        </div>
-                        <div class="button-container">
-                            <button type="submit" class="btn-outline">Guardar</button>
-                        </div>
-                    </form>
+                <div class="container" style="max-width: 700px; margin: 0 auto;">
+                    <div
+                        style="background: #fff; border-radius: 1.5rem; box-shadow: 0 8px 32px rgba(32,56,100,0.10); padding: 2.5rem 2rem;">
+                        <h2 class="h2 section-title" style="text-align:center; margin-bottom: 2rem;">Editar usuario</h2>
+                        <form th:action="@{/users/{username}/edit(username=${user.username})}" th:object="${user}"
+                            method="post">
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem;">
+                                <div>
+                                    <div class="form-group"
+                                        style="flex-direction: column; align-items: flex-start; margin-bottom: 1rem;">
+                                        <label for="username" style="font-weight: 600; margin-bottom: 0.5rem;">Nombre de
+                                            usuario</label>
+                                        <input type="text" id="username" name="username" th:field="*{username}"
+                                            readonly="readonly" class="form-control"
+                                            style="padding: 0.7rem; border-radius: 0.7rem; border: 1px solid #dbeafe; background: #f3f6fa; width: 100%; font-size: 1.2rem;" />
+                                    </div>
+                                    <div class="form-group"
+                                        style="flex-direction: column; align-items: flex-start; margin-bottom: 1rem;">
+                                        <label for="password"
+                                            style="font-weight: 600; margin-bottom: 0.5rem;">Contraseña</label>
+                                        <input type="text" id="password" name="password" th:field="*{password}"
+                                            class="form-control"
+                                            style="padding: 0.7rem; border-radius: 0.7rem; border: 1px solid #dbeafe; background: #f3f6fa; width: 100%; font-size: 1.2rem;" />
+                                    </div>
+                                    <div class="form-group"
+                                        style="flex-direction: column; align-items: flex-start; margin-bottom: 1rem;">
+                                        <label for="email" style="font-weight: 600; margin-bottom: 0.5rem;">Correo
+                                            electrónico</label>
+                                        <input type="email" id="email" name="email" th:field="*{address.email}"
+                                            class="form-control"
+                                            style="padding: 0.7rem; border-radius: 0.7rem; border: 1px solid #dbeafe; background: #f3f6fa; width: 100%; font-size: 1.2rem;" />
+                                    </div>
+                                    <div class="form-group"
+                                        style="flex-direction: column; align-items: flex-start; margin-bottom: 1rem;">
+                                        <label for="firstName" style="font-weight: 600; margin-bottom: 0.5rem;">Primer
+                                            apellido</label>
+                                        <input type="text" id="firstName" name="firstName"
+                                            th:field="*{address.firstName}" class="form-control"
+                                            style="padding: 0.7rem; border-radius: 0.7rem; border: 1px solid #dbeafe; background: #f3f6fa; width: 100%; font-size: 1.2rem;" />
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group"
+                                        style="flex-direction: column; align-items: flex-start; margin-bottom: 1rem;">
+                                        <label for="lastName" style="font-weight: 600; margin-bottom: 0.5rem;">Segundo
+                                            apellido</label>
+                                        <input type="text" id="lastName" name="lastName" th:field="*{address.lastName}"
+                                            class="form-control"
+                                            style="padding: 0.7rem; border-radius: 0.7rem; border: 1px solid #dbeafe; background: #f3f6fa; width: 100%; font-size: 1.2rem;" />
+                                    </div>
+                                    <div class="form-group"
+                                        style="flex-direction: column; align-items: flex-start; margin-bottom: 1rem;">
+                                        <label for="street"
+                                            style="font-weight: 600; margin-bottom: 0.5rem;">Calle</label>
+                                        <input type="text" id="street" name="street" th:field="*{address.street}"
+                                            class="form-control"
+                                            style="padding: 0.7rem; border-radius: 0.7rem; border: 1px solid #dbeafe; background: #f3f6fa; width: 100%; font-size: 1.2rem;" />
+                                    </div>
+                                    <div class="form-group"
+                                        style="flex-direction: column; align-items: flex-start; margin-bottom: 1rem;">
+                                        <label for="city"
+                                            style="font-weight: 600; margin-bottom: 0.5rem;">Ciudad</label>
+                                        <input type="text" id="city" name="city" th:field="*{address.city}"
+                                            class="form-control"
+                                            style="padding: 0.7rem; border-radius: 0.7rem; border: 1px solid #dbeafe; background: #f3f6fa; width: 100%; font-size: 1.2rem;" />
+                                    </div>
+                                    <div class="form-group"
+                                        style="flex-direction: column; align-items: flex-start; margin-bottom: 1rem;">
+                                        <label for="zipCode" style="font-weight: 600; margin-bottom: 0.5rem;">Código
+                                            postal</label>
+                                        <input type="text" id="zipCode" name="zipCode" th:field="*{address.zipCode}"
+                                            class="form-control"
+                                            style="padding: 0.7rem; border-radius: 0.7rem; border: 1px solid #dbeafe; background: #f3f6fa; width: 100%; font-size: 1.2rem;" />
+                                    </div>
+                                    <div class="form-group"
+                                        style="flex-direction: column; align-items: flex-start; margin-bottom: 1rem;">
+                                        <label for="country"
+                                            style="font-weight: 600; margin-bottom: 0.5rem;">País</label>
+                                        <input type="text" id="country" name="country" th:field="*{address.country}"
+                                            class="form-control"
+                                            style="padding: 0.7rem; border-radius: 0.7rem; border: 1px solid #dbeafe; background: #f3f6fa; width: 100%; font-size: 1.2rem;" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="button-container" style="justify-content: center;">
+                                <button type="submit" class="btn-outline"
+                                    style="width: 100%; padding: 1rem 0; font-size: 1.5rem; border-radius: 0.7rem;">Guardar</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </section>
         </article>

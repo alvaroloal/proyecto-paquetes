@@ -21,7 +21,8 @@
 							paqueteria.
 						</p>
 
-						<a href="#service" class="btn-outline" style="background-color: hsl(32, 100%, 50%);">Ver servicios</a>
+						<a href="#service" class="btn-outline" style="background-color: hsl(32, 100%, 50%);">Ver
+							servicios</a>
 					</div>
 				</div>
 			</section>
@@ -78,56 +79,54 @@
 			</section>
 
 			<section class="section service" id="service" aria-label="service">
-				<div class="container">
-					<p class="section-subtitle">Nuestros servicios</p>
-
-					<h2 class="h2 section-title">Servicios que ofrecemos</h2>
-
-					<p class="section-text">
-						Para atender tus necesidades ofrecemos estos servicios.
-					</p>
-
-					<ul class="feature-list grid-list">
+				<div class="container" style="max-width: 1000px;">
+					<p class="section-subtitle" style="margin-bottom: 1rem; text-align:center;">Nuestros servicios</p>
+					<h2 class="h2 section-title" style="margin-bottom: 1.5rem; text-align:center;">Servicios que
+						ofrecemos</h2>
+					<p class="section-text" style="margin-bottom: 2rem; text-align:center;">Para atender tus necesidades
+						ofrecemos estos servicios.</p>
+					<ul class="feature-list grid-list" style="gap: 2rem; justify-content: center;">
 						<li>
-							<div class="feature-card">
-								<div class="card-icon">
+							<div class="feature-card"
+								style="background: #fff; border-radius: 1.5rem; box-shadow: 0 8px 32px rgba(32,56,100,0.10); padding: 2rem; text-align: center; transition: box-shadow 0.3s;">
+								<div class="card-icon" style="margin-bottom: 1rem;">
 									<img th:src="@{/img/feature-icon-1.png}" width="72" height="91" alt="" />
 								</div>
-
-								<h3 class="h3 card-title">Hacer un envío</h3>
-
-								<p class="card-text">
-									Envía tu paquete al destino que desees.
-								</p>
+								<h3 class="h3 card-title" style="margin-bottom: 1rem;">Hacer un envío</h3>
+								<p class="card-text" style="margin-bottom: 1.5rem;">Envía tu paquete al destino que
+									desees.</p>
 								<div class="card-btn">
-									<a th:href="@{/deliveries/create}" type="submit">
-										Crear envío
-									</a>
+									<a th:href="@{/deliveries/create}" type="submit"
+										style="color: var(--prussian-blue); font-size: 1.2rem; border: 2px solid var(--prussian-blue); border-radius: 0.7rem; padding: 0.5rem 1.2rem; background: var(--alice-blue); transition: background 0.3s;">Crear
+										envío</a>
 								</div>
 							</div>
 						</li>
 						<li>
 						</li>
 						<li>
-							<div class="feature-card">
-								<div class="card-icon">
+							<div class="feature-card"
+								style="background: #fff; border-radius: 1.5rem; box-shadow: 0 8px 32px rgba(32,56,100,0.10); padding: 2rem; text-align: center; transition: box-shadow 0.3s;">
+								<div class="card-icon" style="margin-bottom: 1rem;">
 									<img th:src="@{/img/feature-icon-3.png}" width="93" height="93" alt="imagen" />
 								</div>
-
-								<h3 class="h3 card-title">Seguimiento</h3>
-
-								<p class="card-text">
-									Introduce el numero de seguimiento de tu envío para localizarlo.
-								</p>
+								<h3 class="h3 card-title" style="margin-bottom: 1rem;">Seguimiento</h3>
+								<p class="card-text" style="margin-bottom: 1.5rem;">Introduce el número de seguimiento
+									de tu envío para localizarlo.</p>
 								<div th:if="${errorMessage}">
-									<p th:style="'color: red;'" th:text="${errorMessage}"></p>
+									<p th:style="'color: #e74c3c; font-weight: 600; text-align: center; margin: 0;'"
+										th:text="${errorMessage}"></p>
 								</div>
-									<form th:action="@{/deliveries/view}" method="post" class="navbar-link" data-nav-link>
-										<label for="deliveryId"></label>
-										<input class="input-text" type="text" id="deliveryId" placeholder="ID" name="deliveryId" required>
-										<button class="card-btn" type="submit">Localizar</button>
-										<ion-icon name="chevron-forward"></ion-icon>
-									</form>
+								<form th:action="@{/deliveries/view}" method="post" class="navbar-link" data-nav-link
+									style="display: flex; gap: 1rem; justify-content: center; align-items: center; margin-top: 1rem;">
+									<label for="deliveryId" style="display:none;"></label>
+									<input class="input-text" type="text" id="deliveryId" placeholder="ID"
+										name="deliveryId" required
+										style="padding: 0.7rem; border-radius: 0.7rem; border: 1px solid #dbeafe; background: #f3f6fa; font-size: 1.2rem; width: 120px;" />
+									<button class="card-btn" type="submit"
+										style="color: var(--prussian-blue); font-size: 1.2rem; border: 2px solid var(--prussian-blue); border-radius: 0.7rem; padding: 0.5rem 1.2rem; background: var(--alice-blue); transition: background 0.3s;">Localizar</button>
+									<ion-icon name="chevron-forward"></ion-icon>
+								</form>
 							</div>
 						</li>
 					</ul>
