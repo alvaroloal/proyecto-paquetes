@@ -1,104 +1,366 @@
-# Proyecto-paquetes
+# Sistema de Gestión de Paquetería 📦
 
-## Guía rápida
+Aplicación web empresarial desarrollada con Spring Boot para la gestión integral de servicios de transporte y paquetería. Implementa cálculo automático de tarifas, generación de documentos PDF, control de acceso basado en roles y sistema de métricas empresariales.
 
-Es necesario tener instalado Maven como gestor de dependencias y del proyecto así como una versión de Java 17 o superior.
+## 📋 Tabla de contenidos
 
-1. Clona el proyecto en local
-    ```bash
-    git clone https://github.com/alvaroLorente1/Proyecto-paquetes.git
-    ```  
+- [Funcionalidades del Sistema](#funcionalidades-del-sistema)
+- [Tecnologías Utilizadas](#tecnologías-utilizadas)
+- [Requisitos del Sistema](#requisitos-del-sistema)
+- [Instalación y Ejecución](#instalación-y-ejecución)
+- [Acceso a la Aplicación](#acceso-a-la-aplicación)
+- [Estructura del Proyecto](#estructura-del-proyecto)
+- [Arquitectura del Sistema](#arquitectura-del-sistema)
+- [Funcionalidades por Servicio](#funcionalidades-por-servicio)
+- [Algoritmo de Cálculo de Precios](#algoritmo-de-cálculo-de-precios)
+- [Base de Datos](#base-de-datos)
+- [Configuración de Seguridad](#configuración-de-seguridad)
+- [Consideraciones Técnicas](#consideraciones-técnicas)
 
-2. Arranca la aplicación con Maven
-    ```bash
-    mvn spring-boot:run 
-    ```
+## 🚀 Funcionalidades del sistema
 
-## Motivación
-Se desea implementar una aplicación que gestione el envío y seguimiento de paquetes en una empresa de transporte, se llevará el control de los envíos de paquetería.
+- **Gestión de envíos**: CRUD completo con cálculo automático de precios, fechas y estados
+- **Generación de documentos PDF**: Facturas y reportes mediante iText 5.5.13.3
+- **Sistema de seguimiento**: Consulta de envíos por ID y usuario
+- **Control de acceso**: Tres roles con permisos diferenciados (SINGLE_TABLE inheritance)
+- **Sistema de retroalimentación**: Valoraciones numéricas y comentarios descriptivos
+- **Reportes empresariales**: Agregación de métricas (ingresos, envíos, rating promedio)
+- **Autenticación**: Form-based authentication con Spring Security 6.x
+- **Frontend**: Vistas Thymeleaf con integración Spring Security
 
-## Funcionamiento
-Un usuario accede a la aplicación y puede elegir entre hacer un envío o realizar el seguimiento de un envío ya realizado.  
+## 🛠️ Tecnologías utilizadas
 
-Para consultar los detalles de un envío ya realizado, no es necesario ser cliente dado de alta en el sistema. Sin embargo, para poder realizar un envío hay que darse de alta como cliente para poder elegir los detalles del envío, así como poder descargar la factura correspondiente.  
+| Tecnología | Versión | Propósito |
+|------------|---------|-----------|
+| Java | 17+ | Lenguaje de programación |
+| Spring Boot | 3.2.5 | Framework backend |
+| Spring Data JPA | 3.2.5 | Persistencia de datos |
+| Spring Security | 6.x | Seguridad y autenticación |
+| Thymeleaf | 3.x | Motor de plantillas frontend |
+| H2 Database | Runtime | Base de datos en memoria |
+| Maven | - | Gestión de dependencias |
+| Lombok | 1.18.32 | Reducción de código boilerplate |
+| iText PDF | 5.5.13.3 | Generación de documentos PDF |
 
-Los clientes podrán valorar y dejar comentarios sobre el servicio ofrecido para que el administrador pueda incluir mejoras en la aplicación. 
-Además, el administrador tendrá un panel de control para poder realizar operaciones sobre los usuarios, y además, registrar nuevos usuarios.  
+## 📦 Requisitos del sistema
 
-Por último, el administrador desde el panel podrá generar un reporte del estado actual de la empresa en el que se detallen el número de envíos gestionados, la puntuación media del servicio y los ingresos totales en el sistema.
+- Java 17+
+- Maven 3.6+
 
-## Arquitectura
-Para implementar la aplicación, se ha decidido dividir las funcionalidades en los siguientes servicios: usuarios, envíos, reportes, comentarios y facturas.
+## 🔧 Instalación y ejecución
 
+```bash
+# Clonar repositorio
+git clone https://github.com/alvaroLorente1/Proyecto-paquetes.git
 
-Diagrama diseño
-![diagrama del proyecto](doc/diagrama-clases.png)
-Diagrama análisis
-![diagrama del proyecto](doc/analisis.png)
+# Compilar
+mvn clean install
 
+# Ejecutar (desde el directorio del módulo principal)
+cd ProyectoAlvaroLorenteAlman
+mvn spring-boot:run
+```
 
+**Aplicación disponible en:** http://localhost:9000
 
+## 🌐 Acceso a la aplicación
 
- **Servicio de gestión de usuario**  
+| Recurso | URL | Credenciales |
+|---------|-----|--------------|
+| **Aplicación Web** | http://localhost:9000 | Ver tabla inferior |
+| **Consola H2** | http://localhost:9000/h2-console | Usuario: `sa` / Contraseña: _(vacía)_ |
+| **JDBC URL** | `jdbc:h2:mem:test` | - |
 
-Es el encargado de gestionar toda la lógica relacionada con los usuarios del sistema, que podrán ser los siguientes:  
+### Credenciales de usuario
 
-* Visitante: usuarios que acceden a la página web para obtener información sobre los servicios ofrecidos. 
-No están autenticados.
-No tienen acceso a funciones de envío o gestión.
-Pueden consultar el estado básico de cualquier envío.
-Puede registrarse en el sistema como cliente.
-Puede ver las valoraciones de otros clientes sobre el servicio.
-* Cliente: representa al usuario que se autentica en el sistema.
-Puede crear y consultar los detalles de los envíos que ha realizado. 
-Puede modificar su perfil de usuario pero no puede eliminarlo.
-Puede descargar la factura de un envío.
-Puede añadir una valoración sobre el funcionamiento del sistema.
-* Administrador: es un tipo de usuario que representa al administrador del sistema o gestor de la empresa que utiliza la aplicación.Puede hacer lo mismo que un cliente y además:
-Crear o modificar clientes.
-Eliminar clientes excepto a sí mismo.
-Generar un reporte de operaciones incluyendo el número de envíos realizados, la puntuación media y los ingresos del sistema.
+Usuarios cargados desde `import.sql`:
 
-**Servicio de gestión de envíos**  
+| Rol | Usuario | Contraseña |
+|-----|---------|------------|
+| Administrador | admin | admin |
+| Cliente | cliente1 | cliente1 |
 
-Es el encargado de la gestión completa del envío y del cálculo del coste. Ademas permitirá las siguientes funcionalidades:  
+## 📁 Estructura del proyecto
 
-* Recuperar todos los envíos del sistema.
-* Recuperar los envíos realizados por un único usuario.
-* Crear un envío  y guardarlo en el sistema con las siguientes características:  
+```
+proyecto-paquetes/
+└── ProyectoAlvaroLorenteAlman/
+    ├── src/
+    │   ├── main/
+    │   │   ├── java/com/salesianostriana/dam/proyectoalvarolorentealman/
+    │   │   │   ├── controller/        # Controladores MVC
+    │   │   │   ├── model/             # Entidades JPA
+    │   │   │   ├── repository/        # Repositorios Spring Data
+    │   │   │   ├── service/           # Lógica de negocio
+    │   │   │   ├── security/          # Configuración de seguridad
+    │   │   │   ├── exception/         # Excepciones personalizadas
+    │   │   │   └── json/              # Serializadores JSON
+    │   │   └── resources/
+    │   │       ├── templates/         # Plantillas Thymeleaf
+    │   │       ├── static/            # CSS, JS, imágenes
+    │   │       ├── schema.sql         # Esquema de base de datos
+    │   │       ├── import.sql         # Datos iniciales
+    │   │       └── application.properties
+    │   └── test/                      # Tests (pendiente)
+    └── pom.xml                        # Configuración Maven
+```
 
-* Características del paquete: tipo (sobre, caja o documento), peso y dimensiones (alto, ancho y largo).
-* Tipo de transporte: estándar (7 días), exprés (3 días), urgente (1 día).
-* Origen.
-* Destino.
-* Fecha de envío.
-* Fecha estimada de llegada.
-* Estado: en espera, en tránsito o entregado.
-* Coste.
-* Factura del envío.
+## 🏗️ Arquitectura del sistema
 
-**Servicio de gestión de reportes**  
+### Patrón arquitectónico
 
-Es el encargado de generar los reportes asociados a los envíos realizados por el total de los clientes y la factura de un envío individual. Tendrá los siguientes componentes:  
+Arquitectura en capas (Layered Architecture) con separación de responsabilidades:
 
-* Factura: información financiera relacionada con los detalles de un envío en concreto.
-* Coste
-* Impuestos
-* Fecha de emisión
-* Datos del cliente
-* Reporte: estado financiero de la empresa para un periodo determinado.
-* Número de envíos realizados
-* Puntuación media de los clientes
-* Facturación total.
+| Capa | Paquete | Responsabilidad |
+|------|---------|-----------------|
+| **Presentación** | `controller/` | Controladores MVC/REST, manejo de peticiones HTTP |
+| **Negocio** | `service/` | Lógica de negocio, cálculos, transacciones |
+| **Persistencia** | `repository/` | Acceso a datos mediante Spring Data JPA |
+| **Modelo** | `model/` | Entidades JPA, relaciones, herencia SINGLE_TABLE |
+| **Seguridad** | `security/` | Configuración Spring Security |
 
-**Servicio de gestión de comentarios**  
+### Diagramas
 
-Es el encargado de gestionar las valoraciones de los clientes del sistema de manera que se pueda detectar puntos de mejora.  
+**Diagrama de clases:**
+![Diagrama de diseño](doc/diagrama-clases.png)
 
-Estos comentarios estarán disponibles en una sección independiente de la aplicación de manera que potenciales clientes puedan consultar la calidad del servicio ofrecido. Los comentarios estarán compuestos por:
-* Usuario. Que deberá existir como cliente en el sistema
-* Puntuación.
-* Descripción del comentario.
+**Diagrama de análisis:**
+![Diagrama de análisis](doc/analisis.png)
+
+## 📋 Funcionalidades por servicio
+
+### 👤 Servicio de gestión de usuarios
+
+**Modelo de herencia**: SINGLE_TABLE con discriminador por columna `role`
+
+**Jerarquía de clases:**
+- `User` (clase abstracta base)
+  - `Customer` (ROLE_CUSTOMER)
+  - `Admin` (ROLE_ADMIN)
+
+**Matriz de permisos:**
+
+| Funcionalidad | Visitante | Cliente | Administrador |
+|---------------|-----------|---------|---------------|
+| Consultar envíos | ✅ | ✅ | ✅ |
+| Ver valoraciones | ✅ | ✅ | ✅ |
+| Registrarse | ✅ | - | - |
+| Crear envíos | ❌ | ✅ | ✅ |
+| Descargar facturas | ❌ | ✅ | ✅ |
+| Modificar propio perfil | ❌ | ✅ | ✅ |
+| Añadir valoraciones | ❌ | ✅ | ✅ |
+| Eliminar propia cuenta | ❌ | ❌ | ❌ |
+| Gestionar usuarios | ❌ | ❌ | ✅ |
+| Eliminar otros usuarios | ❌ | ❌ | ✅ (excepto sí mismo) |
+| Generar reportes | ❌ | ❌ | ✅ |
+
+### 📦 Servicio de gestión de envíos
+
+**Operaciones CRUD:**
+- `getAllDeliveries()`: Recuperar todos los envíos
+- `getDeliveryById(Long id)`: Recuperar envío específico
+- `getDeliveriesByUsername(String username)`: Filtrar por usuario
+- `createDelivery(Delivery delivery)`: Crear con cálculos automáticos
+
+**Proceso de creación de envío:**
+1. Validación de dirección origen (debe existir en sistema)
+2. Cálculo de volumen: `alto × ancho × largo`
+3. Cálculo de precio (ver sección Cálculo de Precios)
+4. Determinación de días de entrega según transporte
+5. Asignación de estado según tipo de transporte
+6. Generación automática de factura
+7. Persistencia con cascada de relaciones
+
+**Enumeraciones:**
+
+| Enum | Valores | Descripción |
+|------|---------|-------------|
+| `PacketType` | SOBRE, CAJA, DOCUMENTO | Tipo de paquete |
+| `PacketTransportation` | URGENTE, EXPRES, ESTANDAR | Modalidad de envío |
+| `PacketStatus` | PENDIENTE, EN_TRANSITO, ENTREGADO | Estado del envío |
+
+**Configuración de transporte:**
+
+| Tipo | Días | Estado inicial |
+|------|------|----------------|
+| URGENTE | 1 | EN_TRANSITO |
+| EXPRES | 3 | PENDIENTE |
+| ESTANDAR | 7 | PENDIENTE |
+
+### 💰 Servicio de gestión de facturas
+
+**Generación de PDF mediante iText 5.5.13.3**
+
+Componentes de la factura:
+- Información del servicio
+- Datos del cliente (origen)
+- Precio base calculado
+- Impuestos aplicados (10%)
+- Total final
+- Fechas: emisión (fecha de envío) y vencimiento (fecha estimada de llegada)
+
+### 📊 Servicio de gestión de reportes
+
+**Generación de reportes empresariales en PDF**
+
+Métricas incluidas:
+- Número total de envíos procesados
+- Puntuación media de valoraciones (promedio de todos los comentarios)
+- Ingresos totales acumulados (suma de todas las facturas)
+- Tabla detallada de comentarios (fecha, puntuación, descripción)
+
+### ⭐ Servicio de gestión de comentarios
+
+**Sistema de retroalimentación de clientes**
+
+Funcionalidades:
+- Registro de valoraciones numéricas
+- Almacenamiento de comentarios descriptivos
+- Consulta pública de valoraciones
+- Vinculación con usuario autenticado
+
+## 💵 Algoritmo de cálculo de precios
+
+**Implementación:** `DeliveryService.calculatePrice(Packet packet, Double packetVolume)`
+
+### Fórmula de precio base
+
+| Tipo | Fórmula |
+|------|---------|
+| `SOBRE` | `2.00` |
+| `CAJA` | `5.00 + (volumen / 1000)` |
+| `DOCUMENTO` | `1.00` |
+
+**Volumen:** `alto × ancho × largo` (cm³)
+
+### Multiplicadores
+
+| Condición | Multiplicador |
+|-----------|---------------|
+| Peso > 1.0 kg | `×1.1` |
+
+### Impuestos
+
+**IVA:** 10% del precio final
+- `total = precio × (1 + 0.1)`
+
+### Ejemplo de cálculo
+
+```
+Input:
+  tipo = CAJA
+  dimensiones = 50 × 30 × 20 cm
+  peso = 1.5 kg
+
+Cálculo:
+  volumen = 50 × 30 × 20 = 30,000 cm³
+  precio_base = 5.00 + (30,000 / 1,000) = 35.00 €
+  precio_ajustado = 35.00 × 1.10 = 38.50 € (sobrepeso)
+  iva = 38.50 × 0.10 = 3.85 €
+  total = 38.50 + 3.85 = 42.35 €
+```
+
+## 🗄️ Base de datos
+
+### Configuración JPA
+
+| Propiedad | Valor |
+|-----------|-------|
+| Motor | H2 Database (en memoria) |
+| JDBC URL | `jdbc:h2:mem:test` |
+| DDL | `none` (schema manual) |
+| Inicialización | `schema.sql` + `import.sql` |
+| Modo init | `always` |
+| Persistencia | No persistente (volatil) |
+
+### Modelo de datos
+
+**Entidades principales:**
+
+| Entidad | Tipo | Descripción |
+|---------|------|-------------|
+| `User` | Abstracta | Clase base con herencia SINGLE_TABLE |
+| `Customer` | Concreta | Rol ROLE_CUSTOMER |
+| `Admin` | Concreta | Rol ROLE_ADMIN |
+| `Delivery` | Entidad | Gestión de envíos |
+| `Invoice` | Entidad | Facturación |
+| `Comment` | Entidad | Valoraciones |
+| `Report` | Entidad | Reportes empresariales |
+| `Address` | Entidad | Direcciones postales |
+| `Packet` | Embebido | Datos del paquete (dentro de Delivery) |
+
+### Relaciones JPA
+
+| Relación | Cardinalidad | Cascada |
+|----------|--------------|---------|
+| `User` → `Address` | One-to-One | ALL |
+| `Delivery` → `Address` (origen) | Many-to-One | - |
+| `Delivery` → `Address` (destino) | Many-to-One | ALL |
+| `Delivery` → `Invoice` | One-to-One | ALL |
+| `Delivery` → `Packet` | Embedded | - |
+| `Comment` → `User` | Many-to-One | - |
+
+## 🔒 Configuración de seguridad
+
+**Framework:** Spring Security 6.x
+**Configuración:** `SecurityConfiguration.java`
+
+### Autenticación
+
+| Aspecto | Configuración |
+|---------|---------------|
+| Método | Form-based authentication |
+| Login URL | `/login` |
+| Success URL | `/dashboard` |
+| Failure handler | Custom con parámetro `?error=true` |
+| Password encoder | `{noop}` (texto plano - **solo desarrollo**) |
+| UserDetailsService | Carga desde base de datos vía `UserService` |
+
+### Autorización de endpoints
+
+**Estado actual:** Todos los endpoints configurados como `.permitAll()`
+
+```java
+.requestMatchers("/h2-console/**", "/css/**", "/js/**", "/img/**").permitAll()
+.requestMatchers("/", "/index", "/login", "/register").permitAll()
+.requestMatchers("/deliveries/**", "/users/**", "/invoices/**",
+                 "/reports/**", "/comments/**").permitAll()
+```
+
+**Recursos estáticos permitidos:**
+- `/h2-console/**` - Consola de base de datos
+- `/css/**`, `/js/**`, `/img/**` - Assets estáticos
+
+**Endpoints de aplicación:**
+- `/`, `/index`, `/login`, `/register` - Acceso público
+- `/deliveries/**`, `/users/**`, `/invoices/**`, `/reports/**`, `/comments/**` - Actualmente público
+
+### Configuración CSRF
+
+- **H2 Console:** CSRF deshabilitado para `/h2-console/**`
+- **Headers:** Deshabilitados para permitir H2 Console en iframe
+
+---
+
+## ⚠️ Consideraciones técnicas
+
+### Seguridad
+- **Contraseñas sin encriptación**: Se utiliza `{noop}` (texto plano) - apropiado solo para desarrollo
+- **Endpoints públicos**: Todos los endpoints están configurados como `.permitAll()`
+- **Para producción**: Implementar BCrypt y control de acceso basado en roles
+
+### Base de Datos
+- **H2 en memoria**: Los datos se pierden al reiniciar la aplicación
+- **Persistencia**: Para producción, migrar a base de datos persistente (MySQL, PostgreSQL)
+
+### Dependencias
+- **Lombok**: Requerido en el IDE para compilación
+- **iText 5.5.13.3**: Librería para generación de PDFs (licencia AGPL)
+
+## 📄 Información del proyecto
+
+**Programa:** Desarrollo de Aplicaciones Multiplataforma (DAM)
+**Tipo:** Proyecto académico
 
 
 
